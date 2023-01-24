@@ -9,8 +9,8 @@ public class Main {
             public void run() {
 
                 //instantiate an object of type screen and run
-                Screen s = new Screen();
-                s.setVisible(true);
+                WelcomeScreen s = new WelcomeScreen();
+
                 s.draw();
             }
         });

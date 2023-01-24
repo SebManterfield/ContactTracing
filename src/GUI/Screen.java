@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 
 // parent screen class implements common UI elements
-public class Screen extends javax.swing.JFrame{
+public class Screen extends javax.swing.JFrame {
 
     // defining basic UI elements
     private JFrame mainFrame = new JFrame();
@@ -13,18 +13,21 @@ public class Screen extends javax.swing.JFrame{
     private JPanel footerPanel = new javax.swing.JPanel();
 
 
-
-    public Screen()
-    { //
+    public Screen() {
+        this.setVisible(true);
     }
+
     // sets basic frame size and calls component draw methods
-     public void draw ()
-    {
+    public void draw() {
+        // set the Frame to be visible
         mainFrame.setVisible(true);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 650));
         drawPanels();
-        drawLabels();
+
+        // call the headerLabel with default values
+        drawHeaderLabel("default", new Font());
 
 
     }
@@ -39,8 +42,7 @@ public class Screen extends javax.swing.JFrame{
 
 
     // draws the panels and positions them
-    public void drawPanels()
-    {
+    public void drawPanels() {
 
         headerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -99,7 +101,6 @@ public class Screen extends javax.swing.JFrame{
         footerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 
-
         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
         footerPanel.setLayout(footerPanelLayout);
         footerPanelLayout.setHorizontalGroup(
@@ -149,14 +150,14 @@ public class Screen extends javax.swing.JFrame{
         pack();
 
 
-
     }
-
-    public void drawLabels()
-    {
+// this method allows for the header label style and size to be changed by passing parameters
+    public void drawHeaderLabel(String labelText, Font font) {
         headerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerLabel.setText("defaultLabel");
+        headerLabel.setText(labelText);
         headerLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        headerLabel.setFont(new java.awt.Font(font.getName(), font.getStyle(), font.getSize())); // NOI18N
+
 
 
     }
