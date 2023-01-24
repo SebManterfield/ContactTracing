@@ -4,18 +4,17 @@ public class Main {
 
     public static void main (String [] args)
     {
-        loadDefault();
-    }
-    public static void loadDefault()
-    {
-        Screen s = new Screen();
-        s.draw();
-        s.setVisible(true);
+        // Create the form & display
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Screen().setVisible(true);
+
+                //instantiate an object of type screen and run
+                Screen s = new Screen();
+                s.setVisible(true);
+                s.draw();
             }
         });
     }
+
 
 }
