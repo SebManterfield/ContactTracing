@@ -23,7 +23,7 @@ public class Screen extends javax.swing.JFrame {
         mainFrame.setVisible(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 650));
+        setPreferredSize(new java.awt.Dimension(900, 800));
         drawPanels();
 
         // call the headerLabel with default values
@@ -31,6 +31,8 @@ public class Screen extends javax.swing.JFrame {
 
 
     }
+
+    
 
     /* Resize screen method used to resize the frame
     public void resizeScreen(int x, int y)
@@ -58,15 +60,15 @@ public class Screen extends javax.swing.JFrame {
         headerPanelLayout.setHorizontalGroup(
                 headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(headerPanelLayout.createSequentialGroup()
-                                .addGap(279, 279, 279)
+                                .addGap(271, 271, 271)
                                 .addComponent(headerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                .addGap(262, 262, 262))
+                                .addGap(270, 270, 270))
         );
         headerPanelLayout.setVerticalGroup(
                 headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(headerPanelLayout.createSequentialGroup()
                                 .addGap(42, 42, 42)
-                                .addComponent(headerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(headerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -75,7 +77,6 @@ public class Screen extends javax.swing.JFrame {
          -------- Content Panel Layout --------
          --------------------------------------
          */
-
 
         contentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -163,6 +164,9 @@ public class Screen extends javax.swing.JFrame {
     }
 
 
-
+public JPanel getContentPanel()
+{
+        return this.contentPanel;
+}
 
 }
