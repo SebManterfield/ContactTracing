@@ -1,14 +1,25 @@
 package Controllers;
-import javax.swing.*;
-public class WelcomeScreenController {
+
+
+
+import Loaders.AgentLoginLoader;
+
+
+public class WelcomeScreenController{
     
 
 
-public static void submitACovidTestBtnPerformed(ActionEvent evt)
+public static void submitACovidTestBtnClicked()
 {
 
 }
 
+
+public static void agentLoginBtnClicked()
+{
+    AgentLoginLoader.loadScreen();
+
+}
 
 
 }

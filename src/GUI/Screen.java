@@ -27,7 +27,7 @@ public class Screen extends javax.swing.JFrame {
         drawPanels();
 
         // call the headerLabel with default values
-        drawHeaderLabel("default", new Font());
+        drawHeaderLabel("default", new MyFont());
 
 
     }
@@ -153,11 +153,11 @@ public class Screen extends javax.swing.JFrame {
 
     }
 // this method allows for the header label style and size to be changed by passing parameters
-    public void drawHeaderLabel(String labelText, Font font) {
+    public void drawHeaderLabel(String labelText, MyFont font) {
         headerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerLabel.setText(labelText);
         headerLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        headerLabel.setFont(new java.awt.Font(font.getName(), font.getStyle(), font.getSize())); // NOI18N
+        headerLabel.setFont(new java.awt.Font(font.getName(), font.getStyle(), font.getSize()));
 
 
 

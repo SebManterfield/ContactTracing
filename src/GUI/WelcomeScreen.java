@@ -2,9 +2,10 @@ package GUI;
 
 import javax.swing.*;
 
+
 import Controllers.WelcomeScreenController;
 
-public class WelcomeScreen extends Screen {
+public class WelcomeScreen extends Screen{
 
     private JButton agentLoginBtn = new JButton();
     private JButton submitATestBtn = new JButton();
@@ -62,7 +63,7 @@ public void updateContentPanel()
 public void drawButtons()
     {   
         // define the button font
-        Font btnFont = new Font (12);
+        MyFont btnFont = new MyFont (12);
        
         // set the agent login button text & font
         this.agentLoginBtn.setText("Agent Login");
@@ -85,18 +86,35 @@ public void drawButtons()
     // draws welcome screen labels
 public void drawLabels()
 {
-    Font welcomeHeader = new Font(24);
+    MyFont welcomeHeader = new MyFont(24);
     super.drawHeaderLabel("Welcome to Contact Tracing", welcomeHeader);
 }
 
 
 public void buttonListeners()
 {
-    submitATestBtn.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            WelcomeScreenController.submitACovidTestBtnPerformed(evt);
+        // adds listeners which call the controller functions
+       submitATestBtn.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            WelcomeScreenController.submitACovidTestBtnClicked();
         }
+        
     });
+
+        // adds listeners which call the controller functions
+       agentLoginBtn.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            WelcomeScreenController.agentLoginBtnClicked();
+        }
+
+
+    });
+
+
+
+
 }
+
+
 
 }
