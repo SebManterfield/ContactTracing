@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 
 
+
 import Controllers.WelcomeScreenController;
 
 public class WelcomeScreen extends Screen{
@@ -18,13 +19,17 @@ WelcomeScreen()
 
     }
 
-public void draw ()
+
+
+public void draw (WelcomeScreen s)
 {
     super.draw();
-
     drawLabels();
     drawButtons();
     updateContentPanel();
+
+    WelcomeScreenController c = new WelcomeScreenController();
+    c.addButtonListeners(s);
 
 }
 
@@ -91,30 +96,20 @@ public void drawLabels()
 }
 
 
-public void buttonListeners()
+public JButton getAgentLoginBtn()
 {
-        // adds listeners which call the controller functions
-       submitATestBtn.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            WelcomeScreenController.submitACovidTestBtnClicked();
-        }
-        
-    });
-
-        // adds listeners which call the controller functions
-       agentLoginBtn.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            WelcomeScreenController.agentLoginBtnClicked();
-        }
-
-
-    });
-
-
-
-
+    return this.agentLoginBtn;
 }
 
 
+public JButton getSubmitATestButton()
+{
+    return this.submitATestBtn;
+}
+
+public void close()
+{
+    super.close();
+}
 
 }
