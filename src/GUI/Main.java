@@ -10,8 +10,7 @@ public class Main {
 
                 //instantiate an object of type screen and run
                 WelcomeScreen s = new WelcomeScreen();
-
-                s.draw();
+                s.draw(s);
             }
         });
     }

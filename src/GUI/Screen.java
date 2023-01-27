@@ -169,4 +169,14 @@ public JPanel getContentPanel()
         return this.contentPanel;
 }
 
+public JPanel getFooterPanel()
+{
+        return this.footerPanel;
+}
+
+public void close()
+{
+        this.dispose();
+}
+
 }
