@@ -2,12 +2,13 @@ package GUI;
 
 import javax.swing.*;
 
+import Controllers.AgentLoginController;
+
 public class AgentLoginScreen extends Screen {
     
 
     // initialise Login Screen attributes
 private JButton loginBtn = new JButton();
-private JButton returnBtn = new JButton();
 private JLabel usernameLabel = new JLabel();
 private JLabel passwordLabel = new JLabel();
 private JLabel loginMessageLabel = new JLabel();
@@ -20,7 +21,7 @@ public AgentLoginScreen()
 
 }
 
-public void draw()
+public void draw(AgentLoginScreen a)
 {
 
     super.draw();
@@ -29,8 +30,9 @@ public void draw()
     drawButtons();
     drawTextFields();
     updatePanels();
+    AgentLoginController c = new AgentLoginController();
+    c.addListeners(a);
     
-    a.returnButtonListener(a);
 
 }
 
@@ -77,28 +79,7 @@ public void updatePanels()
                  .addContainerGap(487, Short.MAX_VALUE))
          );
 
-          /*
-         -------------------------------------
-         -------- Footer Panel Layout --------
-         -------------------------------------
-         */
-
-         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
-        footerPanel.setLayout(footerPanelLayout);
-        footerPanelLayout.setHorizontalGroup(
-            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(footerPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        footerPanelLayout.setVerticalGroup(
-            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(footerPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        
         contentPanel.setVisible(true);
         footerPanel.setVisible(true);
 }
@@ -130,12 +111,12 @@ public void drawButtons()
         this.loginBtn.setFont(new java.awt.Font(btnFont.getName(), btnFont.getStyle(), btnFont.getSize())); 
         
         
-        this.returnBtn.setText("Return to Welcome Screen");
-        this.returnBtn.setFont(new java.awt.Font(btnFont.getName(), btnFont.getStyle(), btnFont.getSize())); 
+      
         
 
+
         this.loginBtn.setVisible(true);
-        this.returnBtn.setVisible(true);
+        super.drawReturnButton();
         
     }
 
@@ -156,4 +137,12 @@ public void drawButtons()
         this.loginMessageLabel.setVisible(true);
 
     }
+
+    public JButton getAgentLoginBtn()
+    {
+        return this.loginBtn;
+    }
+
+
+
 }

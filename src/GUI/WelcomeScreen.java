@@ -13,7 +13,7 @@ public class WelcomeScreen extends Screen{
 
 
 
-WelcomeScreen()
+public WelcomeScreen()
     {
         
 

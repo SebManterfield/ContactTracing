@@ -11,7 +11,7 @@ public class Screen extends javax.swing.JFrame {
     private JPanel headerPanel = new javax.swing.JPanel();
     private JPanel contentPanel = new javax.swing.JPanel();
     private JPanel footerPanel = new javax.swing.JPanel();
-
+    private JButton returnBtn = new JButton();
 
     public Screen() {
         this.setVisible(true);
@@ -162,7 +162,41 @@ public class Screen extends javax.swing.JFrame {
 
 
     }
+public void drawReturnButton ()
+{       MyFont btnFont = new MyFont (12);
 
+        this.returnBtn.setText("Return to Welcome Screen");
+        this.returnBtn.setFont(new java.awt.Font(btnFont.getName(), btnFont.getStyle(), btnFont.getSize())); 
+        footerPanel.setVisible(true);
+        footerPanelReturnBtn();
+}
+
+public void footerPanelReturnBtn()
+{
+          /*
+         -------------------------------------
+         -------- Footer Panel Layout --------
+         -------------------------------------
+         */
+
+         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
+        footerPanel.setLayout(footerPanelLayout);
+        footerPanelLayout.setHorizontalGroup(
+            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(footerPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        footerPanelLayout.setVerticalGroup(
+            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(footerPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        footerPanel.setVisible(true);
+}
 
 public JPanel getContentPanel()
 {
@@ -172,6 +206,11 @@ public JPanel getContentPanel()
 public JPanel getFooterPanel()
 {
         return this.footerPanel;
+}
+
+public JButton getReturnBtn()
+{
+        return this.returnBtn;
 }
 
 public void close()
