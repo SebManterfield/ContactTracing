@@ -91,8 +91,8 @@ public void drawButtons()
     // draws welcome screen labels
 public void drawLabels()
 {
-    MyFont welcomeHeader = new MyFont(24);
-    super.drawHeaderLabel("Welcome to Contact Tracing", welcomeHeader);
+    
+    super.drawHeaderLabel("Welcome to Contact Tracing", super.getHeaderFont());
 }
 
 

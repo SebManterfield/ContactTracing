@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 
 import Controllers.AgentLoginController;
+import java.awt.Font;
 
 public class AgentLoginScreen extends Screen {
     
@@ -14,7 +15,7 @@ private JLabel passwordLabel = new JLabel();
 private JLabel loginMessageLabel = new JLabel();
 private JTextField usernameTF = new JTextField();
 private JPasswordField passwordTF = new JPasswordField();
-private MyFont labelFont = new MyFont();
+
 
 public AgentLoginScreen()
 {
@@ -87,14 +88,17 @@ public void updatePanels()
 
 public void drawLabels()
 { //draw header and login labels
-    MyFont loginHeader = new MyFont(24);
     
-    super.drawHeaderLabel("Agent Login", loginHeader);
+    
+    super.drawHeaderLabel("Agent Login", super.getHeaderFont());
+    
 
-    this.usernameLabel.setFont(new java.awt.Font(labelFont.getName(), labelFont.getStyle(), labelFont.getSize()));
+    Font font = new Font(super.getLabelFontName(), super.getLabelFontStyle(),super.getLabelFontSize());
+
+    this.usernameLabel.setFont(font);
     this.usernameLabel.setText(" Username:");
 
-    this.passwordLabel.setFont(new java.awt.Font(labelFont.getName(), labelFont.getStyle(), labelFont.getSize()));
+    this.passwordLabel.setFont(font);
     this.passwordLabel.setText("Password:");
 
     this.usernameLabel.setVisible(true);
@@ -132,7 +136,8 @@ public void drawButtons()
     // this label is only drawn after a failed login so has it's own method
     public void drawLoginMessageLabel(String message)
     {
-        this.passwordLabel.setFont(new java.awt.Font(labelFont.getName(), labelFont.getStyle(), labelFont.getSize()));
+        Font font = new Font(super.getLabelFontName(), super.getLabelFontStyle(),super.getLabelFontSize());
+        this.passwordLabel.setFont(font);
         this.loginMessageLabel.setText(message);
         this.loginMessageLabel.setVisible(true);
 

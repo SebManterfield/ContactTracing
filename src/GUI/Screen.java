@@ -12,6 +12,8 @@ public class Screen extends javax.swing.JFrame {
     private JPanel contentPanel = new javax.swing.JPanel();
     private JPanel footerPanel = new javax.swing.JPanel();
     private JButton returnBtn = new JButton();
+    private MyFont header = new MyFont(24);
+    private MyFont labelFont = new MyFont();
 
     public Screen() {
         this.setVisible(true);
@@ -212,6 +214,30 @@ public JButton getReturnBtn()
 {
         return this.returnBtn;
 }
+
+public MyFont getHeaderFont()
+{
+        return header;
+}
+
+public MyFont getLabelFont()
+{
+        return labelFont;
+}
+
+public String getLabelFontName()
+{
+        return labelFont.getName();
+}
+public int getLabelFontStyle()
+{
+        return labelFont.getStyle();
+}
+public int getLabelFontSize()
+{
+        return labelFont.getSize();
+}
+
 
 public void close()
 {
