@@ -6,16 +6,12 @@ package Controllers;
 import java.awt.event.*;
 import GUI.WelcomeScreen;
 import Loaders.AgentLoginLoader;
+import Loaders.SubmitATestLoader;
 
 
 public class WelcomeScreenController extends Controller{
     
 
-
-public static void submitACovidTestBtnClicked()
-{
-
-}
 
 public void addButtonListeners(WelcomeScreen ws)
 {
@@ -24,7 +20,7 @@ public void addButtonListeners(WelcomeScreen ws)
         // adds listeners which call the controller functions
        ws.getSubmitATestButton().addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            //submitACovidTestBtnClicked(WelcomeScreen s);
+            submitATestBtnClicked(ws);
         }
         
     });
@@ -43,13 +39,19 @@ public void addButtonListeners(WelcomeScreen ws)
 
 }
 
-public static void agentLoginBtnClicked(WelcomeScreen ws)
+public void agentLoginBtnClicked(WelcomeScreen ws)
 {
     ws.close();
     AgentLoginLoader.loadScreen();
 
 
 }
+
+public void submitATestBtnClicked(WelcomeScreen ws)
+{
+    ws.close();
+    SubmitATestLoader.loadScreen();
+    }
 
 
 }
