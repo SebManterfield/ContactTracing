@@ -33,6 +33,7 @@ Text Fields
 private JTextField patientNameTF = new JTextField();
 private JTextField patientPostcodeTF = new JTextField();
 private JTextField patientTestDateTF = new JTextField();
+private JTextField patientMobileTF = new JTextField();
 private JTextField closeContact1NameTF = new JTextField();
 private JTextField closeContact1NumberTF = new JTextField();
 private JTextField closeContact2NameTF = new JTextField();
@@ -60,7 +61,7 @@ public SubmitATestScreen()
 }
 
 
-public void draw()
+public void draw(SubmitATestScreen sts)
 {
     super.draw();
 
@@ -70,7 +71,7 @@ public void draw()
     drawComboBox();
     updatePanels();
     SubmitATestController c = new SubmitATestController();
-    c.addListeners(a);
+    c.addListeners(sts);
 
 }
 
@@ -78,7 +79,131 @@ public void draw()
 
 public void updatePanels()
 {
+    JPanel contentPanel = super.getContentPanel(); 
+    JPanel footerPanel = super.getFooterPanel();
+
+
+   /*
+         -------------------------------------
+         -------- Content Panel Layout -------
+         -------------------------------------
+         */
+    javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+    contentPanel.setLayout(contentPanelLayout);
+    contentPanelLayout.setHorizontalGroup(
+        contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(contentPanelLayout.createSequentialGroup()
+            .addGap(24, 24, 24)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.testOutcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(this.patientTestOutcomeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.testPostcodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(patientPostcodeTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.testDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(patientTestDateTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.patientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(this.patientNameTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.patientMobileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(patientMobileTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.closeContact1NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(this.closeContact1NameTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.closeContact1NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(this.closeContact1NumberTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.closeContact2NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(this.closeContact2NumberTF))
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.closeContact2NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(this.closeContact2NameTF, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)))
+            .addContainerGap())
+    );
+    // vertical layout
+    contentPanelLayout.setVerticalGroup(
+        contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(contentPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(this.patientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.patientNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.testDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.patientTestDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(this.testPostcodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(this.patientPostcodeTF))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(this.testOutcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(this.patientTestOutcomeBox)
+                    .addGap(19, 19, 19)))
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.patientMobileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.patientMobileTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.closeContact1NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.closeContact1NameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.closeContact1NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.closeContact1NumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.closeContact2NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.closeContact2NameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(this.closeContact2NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(this.closeContact2NumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18))
+    );
     
+    super.drawReturnButton();
+
+    /*
+         -------------------------------------
+         -------- Footer Panel Layout -------
+         -------------------------------------
+         */
+    
+    javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
+    footerPanel.setLayout(footerPanelLayout);
+    footerPanelLayout.setHorizontalGroup(
+        footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerPanelLayout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(this.submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(96, 96, 96))
+    );
+    footerPanelLayout.setVerticalGroup(
+        footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(footerPanelLayout.createSequentialGroup()
+            .addGap(15, 15, 15)
+            .addComponent(this.submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(16, Short.MAX_VALUE))
+    );
+contentPanel.setVisible(true);
+footerPanel.setVisible(true);
+
 }
 
 public void drawLabels()
@@ -94,7 +219,7 @@ public void drawLabels()
     this.patientNameLabel.setText("Patient Name:");
     labelArray.add(this.patientNameLabel);
 
-    labelArray.add(this.patientNameLabel);
+    labelArray.add(this.testPostcodeLabel);
     this.testPostcodeLabel.setText("Postcode Area:");
 
     labelArray.add(this.testDateLabel);
@@ -143,6 +268,7 @@ public void drawTextFields()
 this.patientNameTF.setVisible(true);
 this.patientPostcodeTF.setVisible(true);
 this.patientTestDateTF.setVisible(true);
+this.patientMobileTF.setVisible(true);
 this.closeContact1NameTF.setVisible(true);
 this.closeContact1NumberTF.setVisible(true);
 this.closeContact2NameTF.setVisible(true);
