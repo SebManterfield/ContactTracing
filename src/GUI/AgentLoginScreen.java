@@ -80,7 +80,7 @@ public void updatePanels()
                  .addContainerGap(487, Short.MAX_VALUE))
          );
 
-        
+        super.footerPanelReturnBtn();
         contentPanel.setVisible(true);
         footerPanel.setVisible(true);
 }

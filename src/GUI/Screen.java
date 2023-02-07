@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.*;
 
+import Controllers.Controller;
+
 // parent screen class implements common UI elements
 public class Screen extends javax.swing.JFrame {
 
@@ -169,7 +171,7 @@ public void drawReturnButton ()
 
         this.returnBtn.setText("Return to Welcome Screen");
         this.returnBtn.setFont(new java.awt.Font(btnFont.getName(), btnFont.getStyle(), btnFont.getSize())); 
-        footerPanel.setVisible(true);
+        this.returnBtn.setVisible(true);
         footerPanelReturnBtn();
 }
 
@@ -198,6 +200,36 @@ public void footerPanelReturnBtn()
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         footerPanel.setVisible(true);
+        
+}
+
+public void footerPanelReturnBtn(JButton buttonToAdd)
+{
+          /*
+         -------------------------------------
+         -------- Footer Panel Layout --------
+         -------------------------------------
+         */
+
+         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
+        footerPanel.setLayout(footerPanelLayout);
+        footerPanelLayout.setHorizontalGroup(
+            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(footerPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        footerPanelLayout.setVerticalGroup(
+            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(footerPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        footerPanel.setVisible(true);
+        
 }
 
 public JPanel getContentPanel()
