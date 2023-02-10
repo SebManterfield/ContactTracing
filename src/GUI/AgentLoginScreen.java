@@ -148,6 +148,11 @@ public void drawButtons()
         return this.loginBtn;
     }
 
+    public JTextField getUsernameTF() {
+        return usernameTF;
+    }
 
-
+    public JPasswordField getPasswordTF() {
+        return passwordTF;
+    }
 }
