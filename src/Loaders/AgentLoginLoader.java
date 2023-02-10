@@ -10,4 +10,10 @@ public class AgentLoginLoader {
         AgentLoginScreen a = new AgentLoginScreen();
         a.draw(a);
     }
+
+    public static void loginCheck()
+    {
+        
+    }
+
 }

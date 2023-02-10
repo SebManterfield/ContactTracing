@@ -1,6 +1,8 @@
 package Controllers;
 
 import GUI.AgentLoginScreen;
+import Loaders.AgentLoginLoader;
+
 import java.awt.event.*;
 
 public class AgentLoginController extends Controller {
@@ -27,7 +29,9 @@ super.returnButtonListener(as);
 
 }
 
-
+public void loginBtnClicked()
+{
+    AgentLoginLoader.loginCheck();
 
 
 }
