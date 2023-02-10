@@ -9,6 +9,10 @@ public class SubmitATestController extends Controller {
 
 public void addListeners(SubmitATestScreen sts)
 {
+    super.returnButtonListener(sts);
+
+
+
     
 }
 

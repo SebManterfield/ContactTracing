@@ -2,7 +2,7 @@ package Loaders;
 
 import GUI.WelcomeScreen;;
 
-public class WelcomeScreenLoader {
+public class WelcomeScreenLoader extends Loader {
     
 
 

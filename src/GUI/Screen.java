@@ -8,7 +8,7 @@ import Controllers.Controller;
 public class Screen extends javax.swing.JFrame {
 
     // defining basic UI elements
-    private JFrame mainFrame = new JFrame();
+   
     private JLabel headerLabel = new javax.swing.JLabel();
     private JPanel headerPanel = new javax.swing.JPanel();
     private JPanel contentPanel = new javax.swing.JPanel();
@@ -24,7 +24,7 @@ public class Screen extends javax.swing.JFrame {
     // sets basic frame size and calls component draw methods
     public void draw() {
         // set the Frame to be visible
-        mainFrame.setVisible(true);
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 800));
