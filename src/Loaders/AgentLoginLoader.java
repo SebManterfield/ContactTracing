@@ -1,6 +1,7 @@
 package Loaders;
 
 import GUI.AgentLoginScreen;
+import GUI.Popup;
 
 import java.sql.*;
 
@@ -13,7 +14,8 @@ public class AgentLoginLoader extends Loader {
         a.draw(a);
     }
 
-    public static void loginBtnClicked(AgentLoginScreen as, String username, char[] password) throws SQLException {
+    public static void loginBtnClicked(AgentLoginScreen as, String username, String password) throws SQLException {
+
         Connection c = dbConnect();
         boolean loginValid = false;
         loginValid = checkLoginDetails(c,username, password);
@@ -22,12 +24,12 @@ public class AgentLoginLoader extends Loader {
     }
 
 
-    public static boolean checkLoginDetails(Connection c, String username, char[] password) throws SQLException {
+    public static boolean checkLoginDetails(Connection c, String username, String password) throws SQLException {
 
         Statement s = c.createStatement();
         ResultSet rs = null;
         try {
-            rs = s.executeQuery("CALL username_password_check('" + username + "','" + password.toString() + "'");
+            rs = s.executeQuery("CALL username_password_check('" + username + "','" + password + "'");
         }
         catch(SQLException e)
         {
@@ -51,6 +53,18 @@ public class AgentLoginLoader extends Loader {
 
 
     }
+
+    public static void drawFailedLoginMsg(String msg)
+    {
+        
+        int returnTo = 1;
+        Popup p = new Popup();
+        p.draw(msg, returnTo,p);
+    }
+
+
+
 }
+
 
 

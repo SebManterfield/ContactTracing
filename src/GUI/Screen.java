@@ -2,7 +2,6 @@ package GUI;
 
 import javax.swing.*;
 
-import Controllers.Controller;
 
 // parent screen class implements common UI elements
 public class Screen extends javax.swing.JFrame {
@@ -37,14 +36,6 @@ public class Screen extends javax.swing.JFrame {
     }
 
     
-
-    /* Resize screen method used to resize the frame
-    public void resizeScreen(int x, int y)
-    {
-        mainFrame.setPreferredSize(x,y);
-
-    }
-   */
 
 
     // draws the panels and positions them
@@ -156,6 +147,8 @@ public class Screen extends javax.swing.JFrame {
 
 
     }
+
+    
 // this method allows for the header label style and size to be changed by passing parameters
     public void drawHeaderLabel(String labelText, MyFont font) {
         headerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
