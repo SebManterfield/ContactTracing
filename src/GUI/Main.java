@@ -9,7 +9,7 @@ public class Main {
             public void run() {
 
                 //instantiate an object of type screen and run
-                WelcomeScreen s = new WelcomeScreen();
+                TracerHomepageScreen s = new TracerHomepageScreen();
                 s.draw(s);
             }
         });
