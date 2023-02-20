@@ -48,6 +48,8 @@ private JButton reviewBtn3 = new JButton();
 private JButton reviewBtn4 = new JButton();
 private JButton reviewBtn5 = new JButton();
 private JButton markAllAsReviewedBtn = new JButton();
+
+// Font
 private Font font = new Font(super.getLabelFontName(), super.getLabelFontStyle(),super.getLabelFontSize());
 
 public TracerHomepageScreen()
