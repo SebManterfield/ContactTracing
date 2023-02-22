@@ -249,6 +249,7 @@ public void drawLabels()
 
     for (JLabel temp: labelArray)
     {
+        temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         temp.setFont(font);
         temp.setVisible(true);
 
@@ -281,7 +282,7 @@ this.closeContact2NumberTF.setVisible(true);
 
 public void drawComboBox()
 {
-;
+
 
 this.patientTestOutcomeBox.setVisible(true);
 

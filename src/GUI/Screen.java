@@ -62,16 +62,12 @@ public class Screen extends javax.swing.JFrame {
         headerPanelLayout.setVerticalGroup(
                 headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(headerPanelLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
+                                .addGap(40, 40, 40)
                                 .addComponent(headerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(73, Short.MAX_VALUE))
+                                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        /*
-         --------------------------------------
-         -------- Content Panel Layout --------
-         --------------------------------------
-         */
+       
 
         contentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -190,7 +186,7 @@ public void footerPanelReturnBtn()
             .addGroup(footerPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(this.returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         footerPanel.setVisible(true);
         

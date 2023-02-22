@@ -51,8 +51,10 @@ public void popupBtnClicked (Popup p, int returnTo)
     {
         case 0:
         WelcomeScreenLoader.loadScreen();
+        break;
         case 1:
         AgentLoginLoader.loadScreen();
+        break;
     }
 
 }

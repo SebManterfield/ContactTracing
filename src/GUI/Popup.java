@@ -3,17 +3,23 @@ package GUI;
 import javax.swing.*;
 
 import Controllers.Controller;
+import java.awt.Font;
 
+/*
+ * The Popup class is used to display messages to the user such as a failed login
+ */
 public class Popup extends Screen{
 
     public Popup()
     {this.setVisible(true);}
 
-    JLabel popupLabel = new JLabel();
-    JButton popupButton = new JButton();
-    JPanel popupPanel = new JPanel();
-    MyFont font = new MyFont();
-    
+    // attributes
+    private JLabel popupLabel = new JLabel();
+    private JButton popupBtn = new JButton();
+    private JPanel popupPanel = new JPanel();
+    private Font font = new Font(super.getLabelFontName(), super.getLabelFontStyle(),super.getLabelFontSize());
+
+    // the draw method takes the message to be displayed and the screen to return to as parameters
     public void draw(String msg, int returnTo, Popup p)
     {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -22,41 +28,55 @@ public class Popup extends Screen{
         drawButton();
         drawLabel(msg);
         drawPanel();
+        
 
         Controller c = new Controller();
         c.popupButtonListener(returnTo, p);
     }
 
 
-
+    // draws the popup panel and adds the button and label
     public void drawPanel()
     {  
 
          popupPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+          /*
+         ------------------------------
+         -------- Panel Layout --------
+         ------------------------------
+         */
         javax.swing.GroupLayout popupPanelLayout = new javax.swing.GroupLayout(popupPanel);
         popupPanel.setLayout(popupPanelLayout);
         popupPanelLayout.setHorizontalGroup(
             popupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(popupPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(popupLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(popupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(popupLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(popupPanelLayout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(popupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         popupPanelLayout.setVerticalGroup(
             popupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, popupPanelLayout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addGroup(popupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(popupLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(popupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(167, 167, 167))
+            .addGroup(popupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(popupLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(popupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPanel());
-        getContentPanel().setLayout(layout);
+         /*
+         ------------------------------
+         -------- Group Layout --------
+         ------------------------------
+         */
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -71,29 +91,34 @@ public class Popup extends Screen{
                 .addComponent(popupPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        pack();
         popupPanel.setVisible(true);
    
     }
 
+    //draw the button and set the text
     public void drawButton()
     {
-        popupButton.setText("Accept");
-        popupButton.setFont(new java.awt.Font(font.getName(), font.getStyle(), font.getSize())); 
-        popupButton.setVisible(true);
+        this.popupBtn.setText("Accept");
+        this.popupBtn.setFont(font); 
+        this.popupBtn.setVisible(true);
     }
 
+    // takes the message to be displayed as a parameter
     public void drawLabel(String msg)
     {
-        
-        popupLabel.setText(msg);
-        popupLabel.setFont(new java.awt.Font(font.getName(), font.getStyle(), font.getSize())); 
-        popupLabel.setVisible(true);
+        this.popupLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        this.popupLabel.setText(msg);
+        this.popupLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.popupLabel.setFont(font); 
+        this.popupLabel.setVisible(true);
     }
 
-
+// if the button needs to display other text this getter can be used
 public JButton getPopupBtn()
 {
-return popupButton;
+return popupBtn;
 }
 
 
