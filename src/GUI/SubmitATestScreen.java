@@ -113,23 +113,23 @@ public void updatePanels()
                     .addComponent(this.patientNameTF))
                 .addGroup(contentPanelLayout.createSequentialGroup()
                     .addComponent(this.patientMobileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(12, 12, 12)
                     .addComponent(patientMobileTF))
                 .addGroup(contentPanelLayout.createSequentialGroup()
                     .addComponent(this.closeContact1NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(12, 12, 12)
                     .addComponent(this.closeContact1NameTF))
                 .addGroup(contentPanelLayout.createSequentialGroup()
                     .addComponent(this.closeContact1NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(12, 12, 12)
                     .addComponent(this.closeContact1NumberTF))
                 .addGroup(contentPanelLayout.createSequentialGroup()
                     .addComponent(this.closeContact2NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(12, 12, 12)
                     .addComponent(this.closeContact2NumberTF))
                 .addGroup(contentPanelLayout.createSequentialGroup()
                     .addComponent(this.closeContact2NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(12, 12, 12)
                     .addComponent(this.closeContact2NameTF, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
             .addContainerGap())
     );
@@ -137,7 +137,7 @@ public void updatePanels()
     contentPanelLayout.setVerticalGroup(
         contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(contentPanelLayout.createSequentialGroup()
-            .addContainerGap()
+        .addContainerGap(50, Short.MAX_VALUE)
             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(this.patientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(this.patientNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,9 +152,8 @@ public void updatePanels()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(this.testOutcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(contentPanelLayout.createSequentialGroup()
-                    .addComponent(this.patientTestOutcomeBox)
-                    .addGap(12, 12, 12)))
+                .addComponent(this.patientTestOutcomeBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(this.patientMobileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(this.patientMobileTF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,40 +173,16 @@ public void updatePanels()
             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(this.closeContact2NumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(this.closeContact2NumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(12, 12, 12))
+            .addGap(12, 12, 12)
+            .addContainerGap(50, Short.MAX_VALUE))
     );
     
-    JButton returnBtn = super.getReturnBtn();
+   super.footerPanelReturnBtn(submitBtn);
  
-    /*
-         -------------------------------------
-         -------- Footer Panel Layout -------
-         -------------------------------------
-         */
-    
-    javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
-    footerPanel.setLayout(footerPanelLayout);
-    footerPanelLayout.setHorizontalGroup(
-        footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerPanelLayout.createSequentialGroup()
-        .addGap(20, 20, 20)
-        .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
-        .addComponent(this.submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(20, 20, 20))
-    );
-    footerPanelLayout.setVerticalGroup(
-        footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(footerPanelLayout.createSequentialGroup()
-            .addGap(20, 20, 20)
-            .addGroup(footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
-            .addComponent(this.submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(21, Short.MAX_VALUE))
-    );
+   
 contentPanel.setVisible(true);
 footerPanel.setVisible(true);
-
+pack();
 }
 
 public void drawLabels()

@@ -1,5 +1,7 @@
 package GUI;
 
+import java.sql.*;
+
 public class Main {
 
     public static void main (String [] args)
@@ -9,8 +11,25 @@ public class Main {
             public void run() {
 
                 //instantiate an object of type screen and run
-                AnalystHomepageScreen s = new AnalystHomepageScreen();
-                s.draw(s);
+               
+               
+               
+                SubmitATestScreen ws = new SubmitATestScreen();             
+                ws.draw(ws);
+               
+                    try{
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/diss", "root", "password");
+                        PreparedStatement test = conn.prepareStatement("SELECT * FROM test");
+                        ResultSet rs = test.executeQuery();
+                        
+                
+                
+                    }
+                    catch (SQLException e)
+                    {
+                        System.out.println("Failed to connect");
+                    }
+
             }
         });
     }
