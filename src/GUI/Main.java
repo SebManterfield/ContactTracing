@@ -18,14 +18,17 @@ public class Main {
                 ws.draw(ws);
                
                     try{
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/diss", "root", "password");
+                        Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/diss","test","password");
+                        System.out.println("Connected");
                         PreparedStatement test = conn.prepareStatement("SELECT * FROM test");
                         ResultSet rs = test.executeQuery();
                         
                 
                 
                     }
-                    catch (SQLException e)
+                    catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e)
                     {
                         System.out.println("Failed to connect");
                     }
