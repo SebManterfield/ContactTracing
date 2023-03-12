@@ -1,6 +1,6 @@
 package Controllers;
 
-import GUI.AgentLoginScreen;
+import GUI.*;
 import Loaders.AgentLoginLoader;
 
 import java.awt.event.*;
@@ -18,7 +18,7 @@ public void addListeners(AgentLoginScreen as)
 
 
 // login button listener
-as.getAgentLoginBtn().addActionListener(new ActionListener() {
+    as.getAgentLoginBtn().addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
        
         String username = as.getUsernameTF().getText();
