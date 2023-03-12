@@ -16,6 +16,7 @@ public class Screen extends javax.swing.JFrame {
     private MyFont header = new MyFont(24);
     private MyFont labelFont = new MyFont();
 
+
     public Screen() {
         this.setVisible(true);
     }
@@ -23,7 +24,7 @@ public class Screen extends javax.swing.JFrame {
     // sets basic frame size and calls component draw methods
     public void draw() {
         // set the Frame to be visible
-        
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 800));

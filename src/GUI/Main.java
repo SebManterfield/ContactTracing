@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.sound.midi.Soundbank;
 import java.sql.*;
 
 public class Main {
@@ -18,20 +19,22 @@ public class Main {
                 ws.draw(ws);
                
                     try{
-                        Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/diss","test","password");
+                        // ensure the MySQL connector.JAR file is included in the external libraries of the project
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diss","test","password");
                         System.out.println("Connected");
-                        PreparedStatement test = conn.prepareStatement("SELECT * FROM test");
-                        ResultSet rs = test.executeQuery();
-                        
+
+                        PreparedStatement st = conn.prepareStatement("SELECT * FROM test");
+                        ResultSet rs = st.executeQuery();
+
+                        System.out.println(rs.isFirst());
                 
                 
                     }
-                    catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e)
+                    catch (SQLException e)
                     {
-                        System.out.println("Failed to connect");
+                        System.out.println(e.getMessage());
                     }
+
 
             }
         });

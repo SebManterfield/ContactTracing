@@ -24,17 +24,16 @@ public AgentLoginScreen()
 
 public void draw(AgentLoginScreen a)
 {
-
+    // call parent draw method for common functionality
     super.draw();
-
+    //draw components in turn then update pre-drawn panels with components
     drawLabels();
     drawButtons();
     drawTextFields();
     updatePanels();
+    // instantiate controller and add listeners
     AgentLoginController c = new AgentLoginController();
     c.addListeners(a);
-    
-
 }
 
 public void updatePanels()

@@ -27,6 +27,7 @@ public void returnButtonListener(Screen s)
 
 public void returnBtnClicked(Screen s)
 {
+    //close previous screen and open welcome screen
 s.close();
 WelcomeScreenLoader.loadScreen();
 }
