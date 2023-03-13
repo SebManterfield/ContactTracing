@@ -8,6 +8,8 @@ import java.awt.Font;
 
 public class TracerHomepageScreen extends Screen{
 
+    private int screenID = 3;
+
 /* 
 --------------
 Labels
@@ -305,12 +307,7 @@ public void updateContentPanel()
 
 }
 
-
-
-
-
-
-
-
-
+    public int getScreenID() {
+        return screenID;
+    }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ReviewATestScreen extends Screen {
 
-
+private int screenID = 5;
 
 /* 
 --------------
@@ -228,8 +228,8 @@ contentPanel.setVisible(true);
 
 }
 
-
-
-
+    public int getScreenID() {
+        return screenID;
+    }
 }
 

@@ -8,13 +8,14 @@ import java.awt.Font;
 public class AgentLoginScreen extends Screen {
     
 
-    // initialise Login Screen attributes
+    // initialise Login Screen attribute
+    private int screenID = 1;
 private JButton loginBtn = new JButton();
 private JLabel usernameLabel = new JLabel();
 private JLabel passwordLabel = new JLabel();
 private JLabel loginMessageLabel = new JLabel();
 private JTextField usernameTF = new JTextField();
-private JPasswordField passwordTF = new JPasswordField();
+private JTextField passwordTF = new JPasswordField();
 
 
 public AgentLoginScreen()
@@ -153,7 +154,11 @@ public void drawButtons()
         return usernameTF;
     }
 
-    public JPasswordField getPasswordTF() {
+    public JTextField getPasswordTF() {
         return passwordTF;
+    }
+
+    public int getScreenID() {
+        return screenID;
     }
 }

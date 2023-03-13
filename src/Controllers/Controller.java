@@ -51,11 +51,24 @@ public void popupBtnClicked (Popup p, int returnTo)
     switch(returnTo)
     {
         case 0:
-        WelcomeScreenLoader.loadScreen();
-        break;
+            WelcomeScreenLoader.loadScreen();
+            break;
         case 1:
-        AgentLoginLoader.loadScreen();
-        break;
+            AgentLoginLoader.loadScreen();
+            break;
+        case 2:
+            SubmitATestLoader.loadScreen();
+            break;
+        case 3:
+            TracerHomepageLoader.loadScreen();
+            break;
+        case 4:
+            AnalystHomepageLoader.loadScreen();
+            break;
+        case 5:
+            ReviewATestLoader.loadScreen();
+            break;
+
     }
 
 }

@@ -8,6 +8,7 @@ import Controllers.WelcomeScreenController;
 
 public class WelcomeScreen extends Screen{
 
+    private int screenID = 0;
     private JButton agentLoginBtn = new JButton();
     private JButton submitATestBtn = new JButton();
 
@@ -112,4 +113,7 @@ public void close()
     super.close();
 }
 
+    public int getScreenID() {
+        return screenID;
+    }
 }

@@ -15,25 +15,10 @@ public class Main {
                
                
                
-                SubmitATestScreen ws = new SubmitATestScreen();             
+                WelcomeScreen ws = new WelcomeScreen();
                 ws.draw(ws);
                
-                    try{
-                        // ensure the MySQL connector.JAR file is included in the external libraries of the project
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diss","test","password");
-                        System.out.println("Connected");
 
-                        PreparedStatement st = conn.prepareStatement("SELECT * FROM test");
-                        ResultSet rs = st.executeQuery();
-
-                        System.out.println(rs.isFirst());
-                
-                
-                    }
-                    catch (SQLException e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
 
 
             }

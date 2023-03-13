@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class SubmitATestScreen extends Screen
 {
+    private int screenID = 2;
 private String[] testOutcomes = {"Positive", "Negative"};
 /* 
 --------------
@@ -202,7 +203,7 @@ public void drawLabels()
     this.testPostcodeLabel.setText("Postcode Area:");
 
     labelArray.add(this.testDateLabel);
-    this.testDateLabel.setText("Test Date:");
+    this.testDateLabel.setText("Test Date: (dd/mm/yyyy)");
 
     labelArray.add(this.testOutcomeLabel);
     this.testOutcomeLabel.setText("Test Outcome:");
@@ -263,4 +264,47 @@ this.patientTestOutcomeBox.setVisible(true);
 
 }
 
+    public JButton getSubmitBtn() {
+        return submitBtn;
+    }
+
+    public JTextField getPatientNameTF() {
+        return patientNameTF;
+    }
+
+    public JTextField getPatientPostcodeTF() {
+        return patientPostcodeTF;
+    }
+
+    public JTextField getPatientTestDateTF() {
+        return patientTestDateTF;
+    }
+
+    public JTextField getPatientMobileTF() {
+        return patientMobileTF;
+    }
+
+    public JTextField getCloseContact1NameTF() {
+        return closeContact1NameTF;
+    }
+
+    public JTextField getCloseContact1NumberTF() {
+        return closeContact1NumberTF;
+    }
+
+    public JTextField getCloseContact2NameTF() {
+        return closeContact2NameTF;
+    }
+
+    public JTextField getCloseContact2NumberTF() {
+        return closeContact2NumberTF;
+    }
+
+    public JComboBox getPatientTestOutcomeBox() {
+        return patientTestOutcomeBox;
+    }
+
+    public int getScreenID() {
+        return screenID;
+    }
 }

@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 public class AnalystHomepageScreen extends Screen {
 
+    private int screenID = 4;
+
 // font
     private Font font = new Font(super.getLabelFontName(), super.getLabelFontStyle(),super.getLabelFontSize());
 
@@ -251,6 +253,7 @@ public void drawButtons()
 
 }
 
-
-
+    public int getScreenID() {
+        return screenID;
+    }
 }
