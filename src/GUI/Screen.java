@@ -247,10 +247,7 @@ public MyFont getHeaderFont()
         return header;
 }
 
-public MyFont getLabelFont()
-{
-        return labelFont;
-}
+
 
 public String getLabelFontName()
 {

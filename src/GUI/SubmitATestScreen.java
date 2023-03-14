@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SubmitATestScreen extends Screen
 {
     private int screenID = 2;
-private String[] testOutcomes = {"Positive", "Negative"};
+private String[] testOutcomes = {"Negative", "Positive"};
 /* 
 --------------
 Labels
@@ -200,7 +200,7 @@ public void drawLabels()
     labelArray.add(this.patientNameLabel);
 
     labelArray.add(this.testPostcodeLabel);
-    this.testPostcodeLabel.setText("Postcode Area:");
+    this.testPostcodeLabel.setText("Postcode Area: (E.G: L)");
 
     labelArray.add(this.testDateLabel);
     this.testDateLabel.setText("Test Date: (dd/mm/yyyy)");

@@ -19,12 +19,14 @@ public class AgentLoginLoader extends Loader {
 
         boolean loginValid = checkLoginDetails(c,username, password);
 
+        // if the login is a success close the AgentLoginScreen and open a  new screen
         if(loginValid)
         {
 
             as.close();
             TracerHomepageScreen t = new TracerHomepageScreen();
             t.draw(t);
+            c.close();
         }
         else
             {

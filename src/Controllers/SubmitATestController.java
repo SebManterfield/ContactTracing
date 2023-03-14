@@ -17,9 +17,15 @@ public class SubmitATestController extends Controller {
         sts.getSubmitBtn().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
+                String patientOutcome;
+                if (sts.getPatientTestOutcomeBox().getSelectedIndex() == 0)
+                    patientOutcome = "0";
+                else
+                    patientOutcome ="1";
+
                 String patientName = sts.getPatientNameTF().getText();
                 String patientPostcode = sts.getPatientPostcodeTF().getText();
-                String patientTestDate = sts.getPatientPostcodeTF().getText();
+                String patientTestDate = sts.getPatientTestDateTF().getText();
                 String patientMobile = sts.getPatientMobileTF().getText();
                 String cc1Name = sts.getCloseContact1NameTF().getText();
                 String cc1Number = sts.getCloseContact1NumberTF().getText();
@@ -28,8 +34,9 @@ public class SubmitATestController extends Controller {
 
                 ArrayList<String> patientInfo = new ArrayList<>();
                 patientInfo.add(patientName);
-                patientInfo.add(patientPostcode);
                 patientInfo.add(patientTestDate);
+                patientInfo.add(patientPostcode);
+                patientInfo.add(patientOutcome);
                 patientInfo.add(patientMobile);
                 patientInfo.add(cc1Name);
                 patientInfo.add(cc1Number);
@@ -39,7 +46,7 @@ public class SubmitATestController extends Controller {
                 try {
                     SubmitATestLoader.submitBtnClicked(sts, patientInfo);
                 } catch (Exception f) {
-                    System.out.println("loginBtnClicked method call failed (AgentLoginController) Error Message: " + f.getMessage());
+                    System.out.println("submitBtn method call failed (SubmitATestController) Error Message: " + f.getMessage());
                 }
             }
 
