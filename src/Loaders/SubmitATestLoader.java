@@ -25,21 +25,54 @@ public class SubmitATestLoader extends Loader{
         validateEmptyFields(sts,patientInfo);
         validatePostcodeField(sts, patientInfo);
         validateMobileFields(sts, patientInfo);
-
+        //reformat the date and update patient info
         patientInfo = reformatDate(patientInfo,sts);
 
         // if validation is successful attempt to update database
+
+
         submitTest(patientInfo);
+        //inform the user that the test submission was a success
+        testSuccess(sts);
+
+    }
+
+
+    public static void testSuccess(SubmitATestScreen sts)
+    {
+        String msg = "Test successfully submitted!";
+        int returnTo = 0;
+        sts.close();
+        drawMessage(returnTo,msg);
 
     }
 
     // validate that the postcode area is real
-    public static void validatePostcodeField(SubmitATestScreen sts, ArrayList<String> patientInfo)
-    {
+    public static void validatePostcodeField(SubmitATestScreen sts, ArrayList<String> patientInfo) throws SQLException {
 
+        //create a connection and get the users entered postcode
+        Connection c = dbConnect();
+        String postcodeArea = patientInfo.get(2);
 
+        PreparedStatement checkPostcode = c.prepareStatement("SELECT area_postcode FROM area WHERE area_postcode = '" + postcodeArea+"';");
+        ResultSet rs = null;
 
-
+        try
+        {
+            rs = checkPostcode.executeQuery();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("SQL execution error (SubmitATestLoader) Error Code: " + e.getMessage());
+        }
+        //check to see if result set is empty i.e incorrect postcode area
+        if(!rs.next())
+        {
+            String msg = "Invalid Postcode entered!";
+            drawMessage(sts.getScreenID(),msg);
+        }
+      // assume otherwise the postcode area is correct and do nothing
+        c.close();
     }
 
     // validate the submitted fields and reformat the date
@@ -102,65 +135,30 @@ public class SubmitATestLoader extends Loader{
 
         return patientInfo;
     }
+
+
+
+
+
     // this will submit a test to the test table and close contacts table
     public static void submitTest(ArrayList<String> patientInfo) throws SQLException {
-        System.out.println("In submitATest method");
+
 
         Connection c = dbConnect();
-        //prepare sql statements. Due to the nature of the database tables we need to
-        // submit to the close contacts table first
-        PreparedStatement submitCloseContacts1 = c.prepareStatement("CALL cc_table_insert('" + patientInfo.get(5)+"','"+patientInfo.get(6)+"');");
-        PreparedStatement submitCloseContacts2 = c.prepareStatement("CALL cc_table_insert('" + patientInfo.get(7)+"','"+patientInfo.get(8)+"');");
 
-        // the close contact IDs auto_increment so we can now select the top 2 close contact IDs to get the IDs of the close contacts
-        PreparedStatement getCCid = c.prepareStatement("SELECT cc_id FROM close_contacts ORDER by cc_id DESC limit 2;");
+        PreparedStatement atomic_insert = c.prepareStatement("CALL atomic_insert('" + patientInfo.get(1)+"'," + patientInfo.get(3)+",'"+patientInfo.get(2)+"','"+patientInfo.get(5)+"','"+patientInfo.get(7)+"','"+patientInfo.get(6)+"','"+patientInfo.get(8)+"');");
 
-        String ccid1 = null;
-        String ccid2 = null;
-        ResultSet ccids = null;
 
         try
         {
-            System.out.println("in first try");
-            submitCloseContacts1.executeQuery();
-            submitCloseContacts2.executeQuery();
-            ccids = getCCid.executeQuery();
+
+            atomic_insert.executeQuery();
         }
         catch(SQLException e)
         {
             System.out.println("SQL Error 1 (SubmitATestLoader) Error Code: " + e.getMessage());
         }
-        System.out.println("out first try");
 
-        if (!ccids.next())
-        {
-
-            SQLException e = new SQLException();
-            System.out.println("Close contacts result set empty (SubmitATestLoader)");
-            throw e;
-
-        }
-        else {
-
-            ccid1 = ccids.getString("cc_id");
-
-            ccids.next();
-            ccid2 = ccids.getString("cc_id");
-
-        }
-
-        System.out.println("out if-else");
-        try
-        {
-            System.out.println("in second try");
-            PreparedStatement submitTest = c.prepareStatement("CALL test_table_insert ('" + patientInfo.get(1)+"'," + patientInfo.get(3)+","+1+","+1+","+ccid1+","+ccid2+");");
-            submitTest.executeQuery();
-        }
-        catch(SQLException e)
-        {
-            System.out.println("SQL Error 2 (SubmitATestLoader) Error Code: " + e.getMessage());
-        }
-        System.out.println("successful submission");
 
 
     }
