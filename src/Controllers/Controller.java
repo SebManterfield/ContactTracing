@@ -4,6 +4,7 @@ import GUI.*;
 import Loaders.*;
 
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class Controller {
     
@@ -44,12 +45,10 @@ p.getPopupBtn().addActionListener(new ActionListener(){
 
 }
 
-public void popupBtnClicked (Popup p, int returnTo)
-{
+public void popupBtnClicked (Popup p, int returnTo) {
     p.close();
 
-    switch(returnTo)
-    {
+    switch (returnTo) {
         case 0:
             WelcomeScreenLoader.loadScreen();
             break;
@@ -59,20 +58,21 @@ public void popupBtnClicked (Popup p, int returnTo)
         case 2:
             SubmitATestLoader.loadScreen();
             break;
-        case 3:
-            TracerHomepageLoader.loadScreen();
-            break;
-        case 4:
-            AnalystHomepageLoader.loadScreen();
-            break;
-        case 5:
-            ReviewATestLoader.loadScreen();
-            break;
+
 
     }
-
 }
-
+    public void popupBtnClicked (Popup p, int returnTo, int agentID) throws SQLException {
+        p.close();
+        switch (returnTo) {
+            case 3:
+                TracerHomepageLoader.loadScreen(agentID);
+                break;
+            case 4:
+                AnalystHomepageLoader.loadScreen(agentID);
+                break;
+        }
+}
 
 
 }

@@ -4,6 +4,7 @@ import GUI.AgentLoginScreen;
 import GUI.AnalystHomepageScreen;
 import GUI.TracerHomepageScreen;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class AgentLoginLoader extends Loader {
@@ -20,7 +21,7 @@ public class AgentLoginLoader extends Loader {
         Connection c = dbConnect();
 
         boolean loginValid = checkLoginDetails(c,username, password);
-
+        int agentId = getAgentId(c, username);
 
 
         // if the login is a success close the AgentLoginScreen and open a  new screen
@@ -33,8 +34,8 @@ public class AgentLoginLoader extends Loader {
             {
                 case 0:
                     as.close();
-                    TracerHomepageScreen t = new TracerHomepageScreen();
-                    t.draw(t);
+                    TracerHomepageLoader t = new TracerHomepageLoader();
+                    t.loadScreen(agentId);
 
                     break;
                 case 1:
@@ -142,6 +143,32 @@ public class AgentLoginLoader extends Loader {
         }
     }
 
+    public static int getAgentId(Connection c, String username) throws SQLException {
+
+        PreparedStatement getAgentId = c.prepareStatement("SELECT user_id FROM _user WHERE username = '" + username + "';");
+        ResultSet IDrs = null;
+        int agentID = 0;
+        try
+        {
+            IDrs = getAgentId.executeQuery();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("SQL Execution Error (AgentLoginLoader) Error Code: " + e.getMessage());
+        }
+
+        if (!IDrs.next())
+        {
+            System.out.println("SQL Error - result set empty (AgentLoginLoader - getAgentID())");
+
+        }
+
+        else
+        {
+            agentID = IDrs.getInt("user_id");
+        }
+        return agentID;
+    }
 
 }
 

@@ -1,4 +1,6 @@
 package GUI;
+import Controllers.AnalystHomepageController;
+
 import javax.swing.*;
 
 
@@ -79,6 +81,8 @@ public void draw(AnalystHomepageScreen ahs)
     //drawTextFields();
    
     updateContentPanel();
+    AnalystHomepageController ahc = new AnalystHomepageController();
+    ahc.addButtonListeners(ahs);
 }
 
 public void updateContentPanel()

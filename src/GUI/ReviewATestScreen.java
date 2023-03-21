@@ -1,4 +1,6 @@
 package GUI;
+import Other.Test;
+
 import javax.swing.*;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -49,11 +51,11 @@ public ReviewATestScreen()
 
 }
 
-public void draw(ReviewATestScreen rts)
+public void draw(ReviewATestScreen rts, Test test)
 {
 super.draw();
 
-drawLabels();
+drawLabels(test);
 drawButtons();
 updateContentPanel();
 //ReviewATestController c = new ReviewATestController();
@@ -62,7 +64,7 @@ updateContentPanel();
 }
 
 
-public void drawLabels(){
+public void drawLabels(Test test){
 
     super.drawHeaderLabel("Review a Test", super.getHeaderFont());
 
@@ -89,25 +91,34 @@ labelArray.add(this.cc2NameLabel);
 this.cc2MobileLabel.setText("Close Contact 2 Mobile: ");
 labelArray.add(this.cc2MobileLabel);
 
-this.testDateVarLabel.setText("Dummy Date");
+this.testDateVarLabel.setText(test.getTestDate());
 labelArray.add(this.testDateVarLabel);
 
-this.testOutcomeVarLabel.setText("Dummy Outcome");
+String outcome;
+if (test.getOutcome().equals("0"))
+{
+    outcome = "Negative";
+}
+else
+{
+    outcome = "Positive";
+}
+this.testOutcomeVarLabel.setText(outcome);
 labelArray.add(this.testOutcomeVarLabel);
 
-this.testLocationVarLabel.setText("Dummy Location");
+this.testLocationVarLabel.setText(test.getTestLocation());
 labelArray.add(this.testLocationVarLabel);
 
-this.cc1NameVarLabel.setText("Dummy Close Contact Name 1");
+this.cc1NameVarLabel.setText(test.getCc1Name());
 labelArray.add(this.cc1NameVarLabel);
 
-this.cc1MobileVarLabel.setText("Dummy Close Contact Mobile 1");
+this.cc1MobileVarLabel.setText(test.getCc1Mobile());
 labelArray.add(this.cc1MobileVarLabel);
 
-this.cc2NameVarLabel.setText("Dummy Close Contact Name 2");
+this.cc2NameVarLabel.setText(test.getCc2Name());
 labelArray.add(this.cc2NameVarLabel);
 
-this.cc2MobileVarLabel.setText("Dummy Close Contact Mobile 2");
+this.cc2MobileVarLabel.setText(test.getCc2Mobile());
 labelArray.add(this.cc2MobileVarLabel);
 
 for(JLabel temp: labelArray)
