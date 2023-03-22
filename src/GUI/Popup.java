@@ -33,6 +33,20 @@ public class Popup extends Screen{
         Controller c = new Controller();
         c.popupButtonListener(returnTo, p);
     }
+    public void draw(String msg, int returnTo, Popup p, int agentID)
+    {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 400));
+
+        drawButton();
+        drawLabel(msg);
+        drawPanel();
+
+
+        Controller c = new Controller();
+        c.popupButtonListener(returnTo, p,agentID);
+    }
 
 
     // draws the popup panel and adds the button and label

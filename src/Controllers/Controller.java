@@ -44,6 +44,22 @@ p.getPopupBtn().addActionListener(new ActionListener(){
 });
 
 }
+    public void popupButtonListener(int returnTo, Popup p,int agentID)  {
+
+
+        p.getPopupBtn().addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e) {
+                try{
+                popupBtnClicked(p, returnTo, agentID);}
+                catch (SQLException ex)
+                {}
+
+            }
+
+        });
+
+    }
 
 public void popupBtnClicked (Popup p, int returnTo) {
     p.close();
@@ -64,8 +80,11 @@ public void popupBtnClicked (Popup p, int returnTo) {
 }
     public void popupBtnClicked (Popup p, int returnTo, int agentID) throws SQLException {
         p.close();
+
         switch (returnTo) {
+
             case 3:
+                System.out.println("in switch");
                 TracerHomepageLoader.loadScreen(agentID);
                 break;
             case 4:

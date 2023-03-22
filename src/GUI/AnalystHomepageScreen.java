@@ -72,10 +72,10 @@ public AnalystHomepageScreen()
     this.setVisible(true);
 }
 
-public void draw(AnalystHomepageScreen ahs)
+public void draw(AnalystHomepageScreen ahs, int[] caseNumArray)
 {
     super.draw();
-    drawLabels();
+    drawLabels(caseNumArray);
     drawButtons();
     //drawComboBoxes();
     //drawTextFields();
@@ -177,8 +177,14 @@ public void updateContentPanel()
         contentPanel.setVisible(true);
 }
 
-public void drawLabels()
+public void drawLabels(int[] caseNumArray)
 {
+    int totalCases = caseNumArray[0];
+    int totalReviewedCases = caseNumArray[1];
+
+    String strTotalCases = Integer.toString(totalCases);
+    String strTotalReviewedCases = Integer.toString(totalReviewedCases);
+
     super.drawHeaderLabel("Analyst Homepage", super.getHeaderFont());
     
     // create arraylist to easily set attributes for all labels
@@ -224,10 +230,10 @@ public void drawLabels()
     this.casesVarLabel.setText(" n ");
     labelArray.add(this.casesVarLabel);
     
-    this.totalCasesVarLabel.setText(" n ");
+    this.totalCasesVarLabel.setText(strTotalCases);
     labelArray.add(this.totalCasesVarLabel);
 
-    this.totalCasesReviewedVarLabel.setText(" n ");
+    this.totalCasesReviewedVarLabel.setText(strTotalReviewedCases);
     labelArray.add(this.totalCasesReviewedVarLabel);
 
     for (JLabel temp: labelArray)

@@ -40,8 +40,7 @@ public class AgentLoginLoader extends Loader {
                     break;
                 case 1:
                     as.close();
-                    AnalystHomepageScreen a = new AnalystHomepageScreen();
-                    a.draw(a);
+                    AnalystHomepageLoader.loadScreen(agentId);
 
                     break;
 

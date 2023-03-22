@@ -13,7 +13,7 @@ public class TracerHomepageController extends Controller{
 
 
 
-    public void addButtonListeners(TracerHomepageScreen ts, ArrayList<Test> testArrayList)
+    public void addButtonListeners(TracerHomepageScreen ts, ArrayList<Test> testArrayList, int agentID)
     {
         super.returnButtonListener(ts);
 
@@ -21,7 +21,7 @@ public class TracerHomepageController extends Controller{
         ts.getReviewBtn1().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int testID = testArrayList.get(0).getTestID();
-                reviewBtnClicked(ts, testID);
+                reviewBtnClicked(ts, testID,agentID);
             }
 
         });
@@ -29,38 +29,40 @@ public class TracerHomepageController extends Controller{
         ts.getReviewBtn2().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int testID = testArrayList.get(1).getTestID();
-                reviewBtnClicked(ts, testID);
+                reviewBtnClicked(ts, testID,agentID);
             }
 
         });
         ts.getReviewBtn3().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int testID = testArrayList.get(2).getTestID();
-                reviewBtnClicked(ts, testID);
+                reviewBtnClicked(ts, testID,agentID);
             }
 
         });
         ts.getReviewBtn4().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int testID = testArrayList.get(3).getTestID();
-                reviewBtnClicked(ts, testID);
+                reviewBtnClicked(ts, testID,agentID);
             }
 
         });
         ts.getReviewBtn5().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int testID = testArrayList.get(4).getTestID();
-                reviewBtnClicked(ts,testID);
+                reviewBtnClicked(ts,testID,agentID);
             }
 
         });
+
+
     }
 
-    public void reviewBtnClicked(TracerHomepageScreen ts, int testID)
+    public void reviewBtnClicked(TracerHomepageScreen ts, int testID, int agentID)
     {
         ts.close();
         try {
-            ReviewATestLoader.loadScreen(testID);
+            ReviewATestLoader.loadScreen(testID,agentID);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

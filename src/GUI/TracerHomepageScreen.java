@@ -71,7 +71,7 @@ public void draw(TracerHomepageScreen ts, int agentID, ArrayList<Test> testArray
     updateContentPanel();
 
     TracerHomepageController c = new TracerHomepageController();
-    c.addButtonListeners(ts,testArrayList);
+    c.addButtonListeners(ts,testArrayList, agentID);
 }
 
 
@@ -79,7 +79,7 @@ public void draw(TracerHomepageScreen ts, int agentID, ArrayList<Test> testArray
 public void drawLabels(int agentID, ArrayList<Test> testArrayList)
 {
     //draw header label
-    super.drawHeaderLabel("Welcome Tracer " + agentID , super.getHeaderFont());
+    super.drawHeaderLabel(" Welcome Tracer " + agentID , super.getHeaderFont());
 
 
     // create arraylists for each type of label and add
@@ -121,18 +121,18 @@ public void drawLabels(int agentID, ArrayList<Test> testArrayList)
     for (JLabel temp: testLabelArray)
     {
         temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        temp.setText("Test " + i);
+        temp.setText(" Test " + i);
         temp.setFont(font);
         temp.setVisible(true);
         i++;
     }
 
-    System.out.println("after first for-loop");
+
 i=0;
     for (JLabel temp: testIDLabelArray)
     {
         temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        temp.setText("Test ID: " + testArrayList.get(i).getTestID());
+        temp.setText(" Test ID: " + testArrayList.get(i).getTestID());
         temp.setFont(font);
         temp.setVisible(true);
         i++;
@@ -142,7 +142,7 @@ i=0;
     for (JLabel temp: testDateLabelArray)
     {
         temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        temp.setText("Test Date: " + testArrayList.get(i).getTestDate());
+        temp.setText(" Test Date: " + testArrayList.get(i).getTestDate());
         temp.setFont(font);
         temp.setVisible(true);
         i++;
@@ -151,7 +151,7 @@ i=0;
     for (JLabel temp: testLocationLabelArray)
     {
         temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        temp.setText("Test Location: " + testArrayList.get(i).getTestLocation());
+        temp.setText(" Test Location: " + testArrayList.get(i).getTestLocation());
         temp.setFont(font);
         temp.setVisible(true);
         i++;
@@ -175,13 +175,13 @@ ArrayList<JButton> reviewBtnArrayList= new ArrayList<>();
     for (JButton temp: reviewBtnArrayList)
     {
 
-        temp.setText("Review Test " + i);
+        temp.setText(" Review Test " + i);
         temp.setFont(font);
         temp.setVisible(true);
         i++;
     }
 
-    markAllAsReviewedBtn.setText("Mark all as Reviewed");
+    markAllAsReviewedBtn.setText(" Mark all as Reviewed");
     markAllAsReviewedBtn.setFont(font);
     markAllAsReviewedBtn.setVisible(true);
 
@@ -246,24 +246,19 @@ public void updateContentPanel()
                                             .addComponent(this.testLocationLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(this.reviewBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                                             .addComponent(this.testLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(contentPanelLayout.createSequentialGroup()
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(this.testIDLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(this.testDateLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(this.testLocationLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(this.reviewBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGroup(contentPanelLayout.createSequentialGroup()
-                                                            .addGap(172, 172, 172)
-                                                            .addComponent(this.markAllAsReviewedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGap(0, 0, Short.MAX_VALUE)))))
-                            .addContainerGap())
-    );
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(this.testIDLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(this.testDateLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(this.testLocationLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(this.reviewBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            ).addContainerGap()));
+
+
     contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
@@ -274,36 +269,35 @@ public void updateContentPanel()
                                     .addComponent(this.testDateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testLocationLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.reviewBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(15, 15, 15)
+                            .addGap(40, 40, 40)
                             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(this.testLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testIDLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testDateLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testLocationLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.reviewBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(15, 15, 15)
+                            .addGap(40, 40, 40)
                             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(this.testLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testIDLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testDateLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testLocationLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.reviewBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(15, 15, 15)
+                            .addGap(40, 40, 40)
                             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(this.testLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testIDLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testDateLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testLocationLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.reviewBtn4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(15, 15, 15)
+                            .addGap(40, 40, 40)
                             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(this.testLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testIDLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testDateLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.testLocationLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(this.reviewBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(20, 20, 20)
-                            .addComponent(this.markAllAsReviewedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
                             .addContainerGap(50, Short.MAX_VALUE))
     );
 

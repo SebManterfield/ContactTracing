@@ -1,4 +1,5 @@
 package GUI;
+import Controllers.ReviewATestController;
 import Other.Test;
 
 import javax.swing.*;
@@ -51,44 +52,44 @@ public ReviewATestScreen()
 
 }
 
-public void draw(ReviewATestScreen rts, Test test)
+public void draw(ReviewATestScreen rts, Test test, int agentID)
 {
 super.draw();
 
 drawLabels(test);
 drawButtons();
 updateContentPanel();
-//ReviewATestController c = new ReviewATestController();
-//r.addListeners(rts);
+ReviewATestController c = new ReviewATestController();
+c.addListeners(rts,test,agentID);
 
 }
 
 
 public void drawLabels(Test test){
 
-    super.drawHeaderLabel("Review a Test", super.getHeaderFont());
+    super.drawHeaderLabel(" Review a Test", super.getHeaderFont());
 
 ArrayList<JLabel> labelArray = new ArrayList<>();
 
-this.patientNameLabel.setText("Patient Name: ");
+this.patientNameLabel.setText(" Test ID: " + test.getTestID());
 labelArray.add(this.patientNameLabel);
 
-this.testDateLabel.setText("Test Date: ");
+this.testDateLabel.setText(" Test Date: ");
 labelArray.add(this.testDateLabel);
 
-this.testOutcomeLabel.setText("Test Outcome: ");
+this.testOutcomeLabel.setText(" Test Outcome: ");
 labelArray.add(this.testOutcomeLabel);
 
-this.cc1NameLabel.setText("Close Contact 1 Name: ");
+this.cc1NameLabel.setText(" Close Contact 1 Name: ");
 labelArray.add(this.cc1NameLabel);
 
-this.cc1MobileLabel.setText("Close Contact 1 Mobile: ");
+this.cc1MobileLabel.setText(" Close Contact 1 Mobile: ");
 labelArray.add(this.cc1MobileLabel);
 
-this.cc2NameLabel.setText("Close Contact 2 Name: ");
+this.cc2NameLabel.setText(" Close Contact 2 Name: ");
 labelArray.add(this.cc2NameLabel);
 
-this.cc2MobileLabel.setText("Close Contact 2 Mobile: ");
+this.cc2MobileLabel.setText(" Close Contact 2 Mobile: ");
 labelArray.add(this.cc2MobileLabel);
 
 this.testDateVarLabel.setText(test.getTestDate());
@@ -242,5 +243,10 @@ contentPanel.setVisible(true);
     public int getScreenID() {
         return screenID;
     }
+
+    public JButton getMarkAsReviewedBtn() {
+        return markAsReviewedBtn;
+    }
 }
+
 

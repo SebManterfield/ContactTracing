@@ -11,14 +11,19 @@ public class TracerHomepageLoader extends Loader {
 
 
     public static void loadScreen(int agentID) throws SQLException {
+        
         ArrayList<Test> testArrayList = getTests(agentID);
+
+
         TracerHomepageScreen ts = new TracerHomepageScreen();
+
         ts.draw(ts, agentID, testArrayList);
     }
 
-    public static ArrayList<Test> getTests(int agentID) throws SQLException {
+    public static ArrayList<Test> getTests(int agentID) throws SQLException{
       //use the stored procedure to get the top 5 tests
         Connection c = dbConnect();
+
         PreparedStatement getTests = c.prepareStatement("CALL get_all_tests(" + agentID + ");");
         ResultSet testRS = null;
         ArrayList<Test> testArrayList = new ArrayList<>();
