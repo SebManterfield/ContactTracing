@@ -64,9 +64,15 @@ public TracerHomepageScreen()
 
 public void draw(TracerHomepageScreen ts, int agentID, ArrayList<Test> testArrayList)
 {
-
+    System.out.println("Inside tracer homepage draw");
     super.draw();
-    drawLabels(agentID,testArrayList);
+
+    if (testArrayList.size() == 0) {
+        drawEmptyLabels(agentID,testArrayList);
+    }
+    else {
+        drawLabels(agentID, testArrayList);
+    }
     drawButtons();
     updateContentPanel();
 
@@ -116,6 +122,7 @@ public void drawLabels(int agentID, ArrayList<Test> testArrayList)
     testLocationLabelArray.add(this.testLocationLabel5);
 
 
+
     //set text of the test title labels and set visible
     int i = 1;
     for (JLabel temp: testLabelArray)
@@ -128,6 +135,8 @@ public void drawLabels(int agentID, ArrayList<Test> testArrayList)
     }
 
 
+
+
 i=0;
     for (JLabel temp: testIDLabelArray)
     {
@@ -138,6 +147,7 @@ i=0;
         i++;
     }
 
+
     i = 0;
     for (JLabel temp: testDateLabelArray)
     {
@@ -147,6 +157,7 @@ i=0;
         temp.setVisible(true);
         i++;
     }
+
     i = 0;
     for (JLabel temp: testLocationLabelArray)
     {
@@ -158,7 +169,91 @@ i=0;
     }
 
 
+
 }
+
+
+public void drawEmptyLabels(int agentID, ArrayList<Test> testArrayList)
+{
+
+    //draw header label
+    super.drawHeaderLabel(" Welcome Tracer " + agentID , super.getHeaderFont());
+
+    // create arraylists for each type of label and add
+    ArrayList<JLabel> testLabelArray = new ArrayList<>();
+    // add test labels to array
+    testLabelArray.add(this.testLabel1);
+    testLabelArray.add(this.testLabel2);
+    testLabelArray.add(this.testLabel3);
+    testLabelArray.add(this.testLabel4);
+    testLabelArray.add(this.testLabel5);
+
+
+
+    ArrayList<JLabel> testIDLabelArray = new ArrayList<>();
+    testIDLabelArray.add(this.testIDLabel1);
+    testIDLabelArray.add(this.testIDLabel2);
+    testIDLabelArray.add(this.testIDLabel3);
+    testIDLabelArray.add(this.testIDLabel4);
+    testIDLabelArray.add(this.testIDLabel5);
+
+    ArrayList<JLabel> testDateLabelArray = new ArrayList<>();
+    testDateLabelArray.add(this.testDateLabel1);
+    testDateLabelArray.add(this.testDateLabel2);
+    testDateLabelArray.add(this.testDateLabel3);
+    testDateLabelArray.add(this.testDateLabel4);
+    testDateLabelArray.add(this.testDateLabel5);
+
+
+    ArrayList<JLabel> testLocationLabelArray = new ArrayList<>();
+    testLocationLabelArray.add(this.testLocationLabel1);
+    testLocationLabelArray.add(this.testLocationLabel2);
+    testLocationLabelArray.add(this.testLocationLabel3);
+    testLocationLabelArray.add(this.testLocationLabel4);
+    testLocationLabelArray.add(this.testLocationLabel5);
+
+    //set text of the test title labels and set visible
+    int i = 1;
+    for (JLabel temp: testLabelArray)
+    {
+
+        Test temp1 = new Test();
+        temp1.setTestID(-1);
+        testArrayList.add(temp1);
+        System.out.println(testArrayList.get(i).getTestID());
+
+        temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        temp.setText(" Test " + i);
+        temp.setFont(font);
+        temp.setVisible(true);
+        i++;
+    }
+
+    for (JLabel temp: testIDLabelArray)
+    {
+        temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        temp.setText(" Test ID: -");
+        temp.setFont(font);
+        temp.setVisible(true);
+    }
+    for (JLabel temp: testDateLabelArray)
+    {
+        temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        temp.setText(" Test Date: -");
+        temp.setFont(font);
+        temp.setVisible(true);
+    }
+    for (JLabel temp: testLocationLabelArray)
+    {
+        temp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        temp.setText(" Test Location: -");
+        temp.setFont(font);
+        temp.setVisible(true);
+    }
+
+
+}
+
 
 public void drawButtons()
 {
@@ -324,5 +419,29 @@ public void updateContentPanel()
 
     public JButton getReviewBtn5() {
         return reviewBtn5;
+    }
+
+    public JLabel getTestIDLabel1() {
+        return testIDLabel1;
+    }
+
+    public JLabel getTestIDLabel2() {
+        return testIDLabel2;
+    }
+
+    public JLabel getTestIDLabel3() {
+        return testIDLabel3;
+    }
+
+    public JLabel getTestIDLabel4() {
+        return testIDLabel4;
+    }
+
+    public JLabel getTestIDLabel5() {
+        return testIDLabel5;
+    }
+
+    public int getScreenID() {
+        return screenID;
     }
 }

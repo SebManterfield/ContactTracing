@@ -20,6 +20,25 @@ public class TracerHomepageLoader extends Loader {
         ts.draw(ts, agentID, testArrayList);
     }
 
+
+    public static void reviewBtnClicked(TracerHomepageScreen ts, int testID, int agentID)
+    {
+        ts.close();
+        if (testID == -1)
+        {
+
+            String msg = "Not a valid test to review!";
+            drawMessage(ts.getScreenID(),msg,agentID);
+        }
+
+        try {
+            ReviewATestLoader.loadScreen(testID,agentID);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
     public static ArrayList<Test> getTests(int agentID) throws SQLException{
       //use the stored procedure to get the top 5 tests
         Connection c = dbConnect();
@@ -41,6 +60,7 @@ public class TracerHomepageLoader extends Loader {
         if (!testRS.next())
         {
             System.out.println("Test result set empty");
+            return testArrayList;
         }
         else
         {

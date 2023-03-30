@@ -32,6 +32,12 @@ public class Loader {
         Popup p = new Popup();
         p.draw(msg, returnTo,p);
     }
+    public static void drawMessage(int returnTo,String msg, int agentID)
+    {
+
+        Popup p = new Popup();
+        p.draw(msg,returnTo,p,agentID);
+    }
 }
 
 

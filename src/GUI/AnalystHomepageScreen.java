@@ -49,7 +49,7 @@ private JButton chartBtn = new JButton();
 Combo Box Outcomes
 --------------
 */
-private String[] intervals = {"-","Days", "Months","Quarters","Years"};
+private String[] intervals = {"-","Days", "Months","Years"};
 
 
 /* 
@@ -72,18 +72,16 @@ public AnalystHomepageScreen()
     this.setVisible(true);
 }
 
-public void draw(AnalystHomepageScreen ahs, int[] caseNumArray)
+public void draw(AnalystHomepageScreen ahs,String period, int[] caseNumArray, int agentID, int cases, int increase)
 {
     super.draw();
-    drawLabels(caseNumArray);
+    drawLabels(caseNumArray, agentID, period, cases,increase);
     drawButtons();
-    //drawComboBoxes();
-    //drawTextFields();
-   
     updateContentPanel();
     AnalystHomepageController ahc = new AnalystHomepageController();
-    ahc.addButtonListeners(ahs);
+    ahc.addButtonListeners(ahs, agentID);
 }
+
 
 public void updateContentPanel()
 {
@@ -177,13 +175,28 @@ public void updateContentPanel()
         contentPanel.setVisible(true);
 }
 
-public void drawLabels(int[] caseNumArray)
+public void drawLabels(int[] caseNumArray, int agentID, String period, int cases, int increase)
 {
     int totalCases = caseNumArray[0];
     int totalReviewedCases = caseNumArray[1];
 
     String strTotalCases = Integer.toString(totalCases);
     String strTotalReviewedCases = Integer.toString(totalReviewedCases);
+    String strAnalysisCases;
+    String strAnalysisIncrease;
+
+    if (cases == -1)
+        strAnalysisCases= "n";
+    else
+        strAnalysisCases = Integer.toString(cases);
+
+    if (increase == -1)
+        strAnalysisIncrease= "n";
+    else
+        strAnalysisIncrease = Integer.toString(cases);
+
+
+
 
     super.drawHeaderLabel("Analyst Homepage", super.getHeaderFont());
     
@@ -192,7 +205,7 @@ public void drawLabels(int[] caseNumArray)
     
     // set text of each label and add to arraylist
     Font subtitle = new Font(super.getLabelFontName(), 1,16);
-    this.welcomeLabel.setText(" Welcome user: DUMMY USER ID" );
+    this.welcomeLabel.setText(" Welcome user: " + agentID );
     this.welcomeLabel.setFont(subtitle);
     this.welcomeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -203,7 +216,7 @@ public void drawLabels(int[] caseNumArray)
     this.intervalLabel.setText(" Interval: ");
     labelArray.add(this.intervalLabel);
 
-    this.periodLabel.setText(" Period: ");
+    this.periodLabel.setText(" Period (1-30): ");
     labelArray.add(this.periodLabel);
 
     this.casesLabel.setText(" Cases: ");
@@ -212,7 +225,7 @@ public void drawLabels(int[] caseNumArray)
     this.percentIncreaseLabel.setText(" Percent Increase: ");
     labelArray.add(this.percentIncreaseLabel);
 
-    this.percentIncreaseVarLabel.setText(" n ");
+    this.percentIncreaseVarLabel.setText(" " + strAnalysisIncrease);
     labelArray.add(this.percentIncreaseVarLabel);
 
     this.periodDisplayLabel.setText(" Period: ");
@@ -224,16 +237,16 @@ public void drawLabels(int[] caseNumArray)
     this.totalCasesReviewedLabel.setText(" Total Cases Reviewed: ");
     labelArray.add(this.totalCasesReviewedLabel);
 
-    this.periodVarLabel.setText(" n ");
+    this.periodVarLabel.setText(" " + period);
     labelArray.add(this.periodVarLabel);
     
-    this.casesVarLabel.setText(" n ");
+    this.casesVarLabel.setText(" "+strAnalysisCases);
     labelArray.add(this.casesVarLabel);
     
-    this.totalCasesVarLabel.setText(strTotalCases);
+    this.totalCasesVarLabel.setText(" " + strTotalCases);
     labelArray.add(this.totalCasesVarLabel);
 
-    this.totalCasesReviewedVarLabel.setText(strTotalReviewedCases);
+    this.totalCasesReviewedVarLabel.setText(" " + strTotalReviewedCases);
     labelArray.add(this.totalCasesReviewedVarLabel);
 
     for (JLabel temp: labelArray)
@@ -266,4 +279,21 @@ public void drawButtons()
     public int getScreenID() {
         return screenID;
     }
+
+    public JButton getSubmitAnalysisBtn() {
+        return submitAnalysisBtn;
+    }
+
+    public JComboBox getIntervalComboBox() {
+        return intervalComboBox;
+    }
+
+    public JTextField getPeriodTF() {
+        return periodTF;
+    }
+
+    public JButton getChartBtn() {
+        return chartBtn;
+    }
 }
+

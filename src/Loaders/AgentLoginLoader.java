@@ -1,10 +1,6 @@
 package Loaders;
 
 import GUI.AgentLoginScreen;
-import GUI.AnalystHomepageScreen;
-import GUI.TracerHomepageScreen;
-
-import javax.xml.transform.Result;
 import java.sql.*;
 
 public class AgentLoginLoader extends Loader {

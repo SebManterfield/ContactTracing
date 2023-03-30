@@ -87,9 +87,13 @@ public static void reviewBtnClicked(ReviewATestScreen rts, Test test,int agentID
     markAsReviewed(test);
     rts.close();
     String msg = "Test successfully reviewed!";
-    Popup p = new Popup();
-    p.draw(msg,3,p,agentID);
+    drawMessage(rts.getScreenID(),msg,agentID);
 
+}
+
+public static void returnBtnClicked(ReviewATestScreen rts, int agentID) throws SQLException {
+    rts.close();
+    TracerHomepageLoader.loadScreen(agentID);
 }
 
 public static void markAsReviewed(Test test) throws SQLException {

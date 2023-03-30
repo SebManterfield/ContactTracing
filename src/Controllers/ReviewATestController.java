@@ -17,7 +17,17 @@ public class ReviewATestController extends Controller {
 
     public void addListeners(ReviewATestScreen rts, Test test, int agentID) {
 
-        super.returnButtonListener(rts);
+        rts.getReturnBtn().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ReviewATestLoader.returnBtnClicked(rts, agentID);
+                }
+                catch (SQLException ex) {
+                    System.out.println("");
+                }
+            }
+        });
         rts.getMarkAsReviewedBtn().addActionListener(new ActionListener() {
                      public void actionPerformed(ActionEvent e) {
 
@@ -30,6 +40,8 @@ public class ReviewATestController extends Controller {
                      }
         });
     }
+
+
 
 
 
