@@ -262,8 +262,15 @@ public int getLabelFontSize()
         return labelFont.getSize();
 }
 
+    public JPanel getHeaderPanel() {
+        return headerPanel;
+    }
 
-public void close()
+    public JLabel getHeaderLabel() {
+        return headerLabel;
+    }
+
+    public void close()
 {
         this.dispose();
 }

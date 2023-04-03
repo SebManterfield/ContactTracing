@@ -64,7 +64,7 @@ public TracerHomepageScreen()
 
 public void draw(TracerHomepageScreen ts, int agentID, ArrayList<Test> testArrayList)
 {
-    System.out.println("Inside tracer homepage draw");
+
     super.draw();
 
     if (testArrayList.size() == 0) {
@@ -421,25 +421,6 @@ public void updateContentPanel()
         return reviewBtn5;
     }
 
-    public JLabel getTestIDLabel1() {
-        return testIDLabel1;
-    }
-
-    public JLabel getTestIDLabel2() {
-        return testIDLabel2;
-    }
-
-    public JLabel getTestIDLabel3() {
-        return testIDLabel3;
-    }
-
-    public JLabel getTestIDLabel4() {
-        return testIDLabel4;
-    }
-
-    public JLabel getTestIDLabel5() {
-        return testIDLabel5;
-    }
 
     public int getScreenID() {
         return screenID;

@@ -1,15 +1,12 @@
 package Loaders;
 
-import GUI.AnalystHomepageScreen;
-import GUI.ChartScreen;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
+import GUI.*;
+import org.jfree.chart.*;
 import org.jfree.data.category.DefaultCategoryDataset;
-
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-
-import static Loaders.Loader.dbConnect;
+import static Loaders.Loader.*;
 
 public class ChartScreenLoader {
 
@@ -19,7 +16,7 @@ public class ChartScreenLoader {
     {
         ahs.close();
         ChartScreen cs = new ChartScreen();
-        cs.draw(lineChart, agentID);
+        cs.draw(cs,lineChart, agentID);
 
     }
 
@@ -32,7 +29,22 @@ public class ChartScreenLoader {
 
         System.out.println("dataset calculated");
 
-        JFreeChart lineChart = createLineChart("Dates", dataset);
+        String interval = "";
+
+        switch (intervalIndex) {
+            case 1:
+                interval = "days";
+                break;
+            case 2:
+                interval = "months";
+                break;
+            case 3:
+                interval = "years";
+                break;
+        }
+
+
+        JFreeChart lineChart = createLineChart("Cases over the last " + period + " " + interval, dataset);
         loadScreen(ahs,lineChart, agentID);
 
     }
@@ -57,7 +69,7 @@ public class ChartScreenLoader {
 
         String[] dates = AnalystHomepageLoader.computePeriod(intervalIndex,period,startDate);
 
-
+        // this simply retrieves all dates for which cases have been submitted between the 2 given dates
         ArrayList<String> datasetArray = getDataset(dates);
 
 
@@ -70,16 +82,35 @@ public class ChartScreenLoader {
         {
             int caseNum = 0;
             int j=i;
-          // check to see if the next index is greater than the size of the arraylist
-            if (datasetArray.size()-1>i+1) {
+            // check to see if the next index is smaller than the size of the arraylist -1
+            // i.e not on the last index
+
+            if ((datasetArray.size()-1) > i+1) {
                 //if there are multiple cases with the same date the case numbers can be incremented
+                System.out.println("in if");
+
+
+            // while the current date in arraylist is the same as the next date
             while (datasetArray.get(j).equals(datasetArray.get(j + 1))) {
-                caseNum++;
+                // increment case numbers for this day
+                caseNum+= 1;
+                // move onto next date in arraylist
                 j++;
+                // also increment i to stop repeated values
+                i++;
+                System.out.println("in while");
             }
+
+
         }
+            // if the value of j hasn't been incremented then add to caseNum
+            // i.e there are not multiple dates which are the same
+            if (j == i)
+            caseNum+=1;
+
             //finally add the values to the dataset
             dataset.addValue(caseNum, series1, datasetArray.get(i));
+            System.out.println("date: " + datasetArray.get(i) + "\n case numbers: " + caseNum);
         }
     return dataset;
     }
@@ -114,6 +145,35 @@ public class ChartScreenLoader {
         }
         // returns arraylist of test_dates oldest to newest
         return datasetArray;
+    }
+
+    public static void returnBtnClicked(ChartScreen cs, int agentID) throws SQLException {
+        cs.close();
+        AnalystHomepageLoader.loadScreen(agentID);
+    }
+
+    public static void saveBtnClicked(ChartScreen cs, int agentID, JFreeChart lineChart, ChartPanel chartPanel) throws IOException {
+
+        saveChart(lineChart,chartPanel);
+
+        cs.close();
+        String msg = "Successfully saved chart!";
+        int returnTo = 4;
+        drawMessage(returnTo,msg,agentID);
+
+    }
+
+    public static void saveChart (JFreeChart lineChart, ChartPanel chartPanel)
+    {
+        try
+        {
+
+            ChartUtils.saveChartAsPNG(new File("chart.png"), lineChart,chartPanel.getWidth(), chartPanel.getHeight());
+        }
+        catch (IOException e)
+        {
+            System.out.println("I/O Exception (Chart Screen Loader.saveBtnClicked) Error Code: " + e.getMessage());
+        }
     }
 
 
