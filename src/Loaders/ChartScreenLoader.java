@@ -2,6 +2,10 @@ package Loaders;
 
 import GUI.*;
 import org.jfree.chart.*;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import java.io.*;
 import java.sql.*;
@@ -58,6 +62,9 @@ public class ChartScreenLoader {
                 "Cases",
                 dataset
         );
+        //set the labels vertical
+        CategoryAxis axis = lineChart.getCategoryPlot().getDomainAxis();
+        axis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
         return lineChart;
 
     }
@@ -69,57 +76,54 @@ public class ChartScreenLoader {
 
         String[] dates = AnalystHomepageLoader.computePeriod(intervalIndex,period,startDate);
 
-        // this simply retrieves all dates for which cases have been submitted between the 2 given dates
-        ArrayList<String> datasetArray = getDataset(dates);
+        // retrieves all dates and case numbers for given period
+        ResultSet casesRS = getDataset(dates);
+
+        int size = 0;
+        while(casesRS.next())
+        {
+            size++;
+            casesRS.next();
+        }
+        casesRS.beforeFirst();
 
 
-
+        String[][] datasetArray = new String[2][size];
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String series1 = "Cases";
 
-        // create a dataset out of all values in the array
-        for(int i =0; i < datasetArray.size();i++)
+        //null check
+        if (!casesRS.next())
+            System.out.println("Empty Dataset!");
+
+        else
         {
-            int caseNum = 0;
-            int j=i;
-            // check to see if the next index is smaller than the size of the arraylist -1
-            // i.e not on the last index
+            int i = 0;
+            casesRS.beforeFirst();
+            while(casesRS.next())
+            {
 
-            if ((datasetArray.size()-1) > i+1) {
-                //if there are multiple cases with the same date the case numbers can be incremented
-                System.out.println("in if");
-
-
-            // while the current date in arraylist is the same as the next date
-            while (datasetArray.get(j).equals(datasetArray.get(j + 1))) {
-                // increment case numbers for this day
-                caseNum+= 1;
-                // move onto next date in arraylist
-                j++;
-                // also increment i to stop repeated values
-                i++;
-                System.out.println("in while");
+                datasetArray[0][i] = casesRS.getString("test_date");
+                datasetArray[1][i] = casesRS.getString("COUNT(test_date)");
+                String testDate = datasetArray[0][i];
+                int caseCount = Integer.parseInt(datasetArray[1][i]);
+                dataset.addValue(caseCount, series1, testDate);
             }
 
-
         }
-            // if the value of j hasn't been incremented then add to caseNum
-            // i.e there are not multiple dates which are the same
-            if (j == i)
-            caseNum+=1;
 
-            //finally add the values to the dataset
-            dataset.addValue(caseNum, series1, datasetArray.get(i));
-            System.out.println("date: " + datasetArray.get(i) + "\n case numbers: " + caseNum);
-        }
+
+
+
     return dataset;
     }
 
-    public static ArrayList<String> getDataset(String[] dates) throws SQLException {
+    // returns a 2D array where the first column is dates and the second column is the case count for these dates
+    public static ResultSet getDataset(String[] dates) throws SQLException {
         Connection c = dbConnect();
-        PreparedStatement cases = c.prepareStatement("SELECT test_date FROM test WHERE test_date BETWEEN '" + dates[1] + "' AND '" + dates[0] + "' ORDER BY test_date ASC;");
+        PreparedStatement cases = c.prepareStatement("CALL get_case_count_between_dates('" + dates[1] + "','" + dates[0] + "');", ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE );
         ResultSet casesRS = null;
-        ArrayList<String> datasetArray = new ArrayList<>();
+
 
 
         try
@@ -131,20 +135,10 @@ public class ChartScreenLoader {
             System.out.println("SQL Exception (ChartScreenLoader.getDataset) Error Code: " + e.getMessage());
         }
 
-        //null check
-        if (!casesRS.next())
-            System.out.println("Empty Dataset!");
-        else
-        {
-            while(casesRS.next())
-            {
-                datasetArray.add(casesRS.getString("test_date"));
-                casesRS.next();
-            }
 
-        }
+
         // returns arraylist of test_dates oldest to newest
-        return datasetArray;
+        return casesRS;
     }
 
     public static void returnBtnClicked(ChartScreen cs, int agentID) throws SQLException {

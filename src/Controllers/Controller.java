@@ -50,11 +50,12 @@ p.getPopupBtn().addActionListener(new ActionListener(){
         p.getPopupBtn().addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e) {
-                try{
-                popupBtnClicked(p, returnTo, agentID);}
-                catch (SQLException ex)
-                {}
 
+                try {
+                    popupBtnClicked(p, returnTo, agentID);
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception (Controller.popupButtonListener) Error Code: " + ex.getMessage());
+                }
             }
 
         });

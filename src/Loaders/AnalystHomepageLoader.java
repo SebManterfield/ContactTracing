@@ -27,7 +27,9 @@ public class AnalystHomepageLoader extends Loader {
 
 
         validateAnalysisFields(ahs,intervalIndex,period, agentID);
+
         String startDate = java.time.LocalDate.now().toString();
+
         String[] dates = computePeriod(intervalIndex,period,startDate);
         int cases =  calculateCases(dates);
         int increase = calculatePercentageIncrease(dates,intervalIndex,period);
@@ -116,12 +118,9 @@ public class AnalystHomepageLoader extends Loader {
         String [] dates = new String[2];
         int period = 0;
 
-
-
-
         String prevDateStr;
 
-
+        // convert the period to an integer
         try
         {
            period =  Integer.parseInt(periodStr);
@@ -132,17 +131,14 @@ public class AnalystHomepageLoader extends Loader {
         }
 
 
-        //days
-//take days off and format
-//months
-//years
+        // switch statement to decide how to calculate previous dates
+
         LocalDate prevDate = switch (intervalIndex) {
             case 1 -> LocalDate.now().minusDays(period);
             case 2 -> LocalDate.now().minusMonths(period);
             case 3 -> LocalDate.now().minusYears(period);
             default -> null;
         };
-        // switch statement to decide how to calculate previous dates
 
         prevDateStr = prevDate.toString();
         //add dates
