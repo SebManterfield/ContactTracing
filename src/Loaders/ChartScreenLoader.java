@@ -24,31 +24,18 @@ public class ChartScreenLoader {
 
     }
 
-    public static void chartBtnClicked(AnalystHomepageScreen ahs, int agentID,int intervalIndex, String period) throws SQLException {
+    public static void chartBtnClicked(AnalystHomepageScreen ahs, int agentID, String[] period) throws SQLException {
 
-        AnalystHomepageLoader.validateAnalysisFields(ahs,intervalIndex,period, agentID);
+        AnalystHomepageLoader.validateAnalysisFields(ahs,period,agentID);
 
 
-        DefaultCategoryDataset dataset = calculateDataset(intervalIndex,period);
+        DefaultCategoryDataset dataset = calculateDataset(period);
 
         System.out.println("dataset calculated");
 
         String interval = "";
 
-        switch (intervalIndex) {
-            case 1:
-                interval = "days";
-                break;
-            case 2:
-                interval = "months";
-                break;
-            case 3:
-                interval = "years";
-                break;
-        }
-
-
-        JFreeChart lineChart = createLineChart("Cases over the last " + period + " " + interval, dataset);
+        JFreeChart lineChart = createLineChart("Cases over the selected period ", dataset);
         loadScreen(ahs,lineChart, agentID);
 
     }
@@ -69,11 +56,11 @@ public class ChartScreenLoader {
 
     }
     //get the case count between 2 given dates in a 2D array then add values to a dataset
-    public static DefaultCategoryDataset calculateDataset(int intervalIndex, String period) throws SQLException {
+    public static DefaultCategoryDataset calculateDataset(String[] period) throws SQLException {
 
         String startDate = java.time.LocalDate.now().toString();
         // retrieves start and end dates for period
-        String[] dates = AnalystHomepageLoader.computePeriod(intervalIndex,period,startDate);
+        String[] dates = AnalystHomepageLoader.computePeriod(period,startDate);
         // retrieves dates and case numbers for period
         ResultSet casesRS = getDataset(dates);
 

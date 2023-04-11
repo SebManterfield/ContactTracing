@@ -17,38 +17,42 @@ public class AnalystHomepageLoader extends Loader {
     public static void loadScreen(int agentID) throws SQLException {
         int[] caseNumArray = getCaseNumbers();
         AnalystHomepageScreen ah = new AnalystHomepageScreen();
-        ah.draw(ah, "n", caseNumArray, agentID , -1, -1);
+        String[] period = {"n", "n", "n"};
+        ah.draw(ah, period, caseNumArray, agentID , -1, -1);
 
     }
-    public static void loadScreen(int agentID, String period, int cases, int increase) throws SQLException {
+    public static void loadScreen(int agentID, String[] period, int cases, int increase) throws SQLException {
         int[] caseNumArray = getCaseNumbers();
         AnalystHomepageScreen ah = new AnalystHomepageScreen();
         ah.draw(ah,period, caseNumArray, agentID, cases,increase);
 
     }
-    public static void submitAnalysisBtnClicked(AnalystHomepageScreen ahs,int intervalIndex, String period, int agentID) throws SQLException {
+    public static void submitAnalysisBtnClicked(AnalystHomepageScreen ahs, String[] period, int agentID) throws SQLException {
 
 
-        validateAnalysisFields(ahs,intervalIndex,period, agentID);
+        boolean fieldsValid = validateAnalysisFields(ahs,period, agentID);
 
-        String startDate = java.time.LocalDate.now().toString();
+       if (!fieldsValid)
+       {
+           ahs.close();
+           String msg = "Invalid entry in Period Text Fields - must be int";
+           drawMessage(ahs.getScreenID(), msg, agentID);
+       }
+       else {
 
-        String[] dates = computePeriod(intervalIndex,period,startDate);
+           String startDate = java.time.LocalDate.now().toString();
 
-        int cases =  calculateCases(dates);
+           String[] dates = computePeriod(period, startDate);
 
-        int increase = calculatePercentageIncrease(dates,intervalIndex,period);
-        ahs.close();
-
-        switch (intervalIndex) {
-            case 1 -> period = (period + " Days");
-            case 2 -> period = (period + " Months");
-            case 3 -> period = (period + " Years");
-        }
+           int cases = calculateCases(dates);
 
 
-        loadScreen(agentID,period,cases,increase);
+           int increase = calculatePercentageIncrease(dates, period);
+           ahs.close();
 
+
+           loadScreen(agentID, period, cases, increase);
+       }
     }
 
 
@@ -97,14 +101,14 @@ public class AnalystHomepageLoader extends Loader {
     }
 
 
-    private static int calculatePercentageIncrease(String[] dates, int intervalIndex, String period) throws SQLException {
+    private static int calculatePercentageIncrease(String[] dates, String period[]) throws SQLException {
 
         //take the start date from the dates passed in
         String startDate = dates[1];
 
 
         // get the dates from the previous period
-        String[] newDates = computePeriod(intervalIndex,period,startDate);
+        String[] newDates = computePeriod(period,startDate);
 
 
         int finalValue = calculateCases(dates);
@@ -125,11 +129,13 @@ public class AnalystHomepageLoader extends Loader {
     }
 
     // compute the start and end dates of a given period
-    public static String[] computePeriod(int intervalIndex, String periodStr, String startDateStr)
+    public static String[] computePeriod(String[] periodArray, String startDateStr)
     { //Interval Indices 1 = Days, 2 = Months, 3 = Years
 
         String [] dates = new String[2];
-        int period = 0;
+        int periodDays = 0;
+        int periodMonths = 0;
+        int periodYears = 0;
         String prevDateStr;
 
         // format the start date string as a localdate so calculation can be performed on it
@@ -140,27 +146,26 @@ public class AnalystHomepageLoader extends Loader {
         // convert the period to an integer
         try
         {
-           period =  Integer.parseInt(periodStr);
+            periodDays =  Integer.parseInt(periodArray[0]);
+            periodMonths =  Integer.parseInt(periodArray[1]);
+            periodYears =  Integer.parseInt(periodArray[2]);
         }
         catch (Exception e)
         {
             System.out.println("Integer parse Exception (AnalystHomepageLoader.computePeriod) Error code: " + e.getMessage());
         }
 
-        // switch statement to decide how to calculate previous dates
-
-        LocalDate prevDate = switch (intervalIndex) {
-            case 1 -> startDate.minusDays(period);
-            case 2 -> startDate.minusMonths(period);
-            case 3 -> startDate.minusYears(period);
-            default -> null;
-        };
+        // subtract period from date
+        LocalDate prevDate = startDate;
+        prevDate = prevDate.minusDays(periodDays);
+        prevDate = prevDate.minusMonths(periodMonths);
+        prevDate = prevDate.minusYears(periodYears);
 
 
         prevDateStr = prevDate.toString();
         //add dates to array
         dates[0] = startDateStr;
-        dates [1] = prevDateStr;
+        dates[1] = prevDateStr;
 
 
         return dates;
@@ -194,28 +199,35 @@ public class AnalystHomepageLoader extends Loader {
 
     }
 
-    public static void validateAnalysisFields(AnalystHomepageScreen ahs, int intervalIndex, String period, int agentID)
+    public static boolean validateAnalysisFields(AnalystHomepageScreen ahs, String period[], int agentID)
     {
-        // check the interval is not left empty
-        if (intervalIndex == 0)
-        {
 
-            ahs.close();
-            String msg = "The interval period is not valid!";
-            drawMessage(ahs.getScreenID(),msg,agentID);
-        }
-
-
-        else {
             // check an integer is entered for period
             try {
-                Integer.parseInt(period);
+                Integer.parseInt(period[0]);
             } catch (Exception e) {
-                ahs.close();
-                String msg = "The period is not valid!";
-                drawMessage(ahs.getScreenID(),msg,agentID);
+                return false;
+
             }
+
+            try{
+                Integer.parseInt(period[1]);
+            }
+            catch (Exception e) {
+                return false;
+
+            }
+
+        try{
+            Integer.parseInt(period[2]);
         }
+        catch (Exception e) {
+            return false;
+
+        }
+        return true;
     }
 
-}
+    }
+
+

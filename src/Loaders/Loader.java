@@ -16,7 +16,6 @@ public class Loader {
         try {
             // ensure the MySQL connector.JAR file is included in the external libraries of the project
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diss", "test", "password");
-            System.out.println("Connected");
             return conn;
 
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package Controllers;
 
+import GUI.AgentLoginScreen;
 import GUI.AnalystHomepageScreen;
 import GUI.TracerHomepageScreen;
 import Loaders.AnalystHomepageLoader;
@@ -16,18 +17,15 @@ public class AnalystHomepageController extends Controller {
     {
         super.returnButtonListener(ahs);
 
-
-
         ahs.getSubmitAnalysisBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //0 = none, 1 = Days, 2 = Months, 3 = Quarters, 4 = Years
-                int intervalIndex = ahs.getIntervalComboBox().getSelectedIndex();
-                String period = ahs.getPeriodTF().getText();
+                String[] period = getTextFields(ahs);
+
 
                 try {
-                    AnalystHomepageLoader.submitAnalysisBtnClicked(ahs,intervalIndex,period, agentID);
+                    AnalystHomepageLoader.submitAnalysisBtnClicked(ahs,period, agentID);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -38,16 +36,38 @@ public class AnalystHomepageController extends Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //0 = none, 1 = Days, 2 = Months, 3 = Quarters, 4 = Years
-                int intervalIndex = ahs.getIntervalComboBox().getSelectedIndex();
-                String period = ahs.getPeriodTF().getText();
+                String[] period = getTextFields(ahs);
                 try {
-                    ChartScreenLoader.chartBtnClicked(ahs, agentID, intervalIndex,period);
+                    ChartScreenLoader.chartBtnClicked(ahs, agentID,period);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
             }
         });
 
+    }
+        // returns values of text fields as an array
+    public String[] getTextFields(AnalystHomepageScreen ahs) {
+        String[] period = new String[3];
+        if (ahs.getPeriodDaysTF().getText().length() == 0) {
+            period[0] = "0";
+        } else {
+            period[0] = ahs.getPeriodDaysTF().getText();
+        }
+
+        if (ahs.getPeriodMonthsTF().getText().length() == 0) {
+            period[1] = "0";
+        } else {
+            period[1] = ahs.getPeriodMonthsTF().getText();
+        }
+
+        if (ahs.getPeriodYearsTF().getText().length() == 0) {
+            period[2] = "0";
+        } else {
+            period[2] = ahs.getPeriodYearsTF().getText();
+        }
+
+        return period;
     }
 
 
