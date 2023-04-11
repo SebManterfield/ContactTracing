@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static java.lang.Math.abs;
 
 
 public class AnalystHomepageLoader extends Loader {
@@ -31,7 +34,9 @@ public class AnalystHomepageLoader extends Loader {
         String startDate = java.time.LocalDate.now().toString();
 
         String[] dates = computePeriod(intervalIndex,period,startDate);
+
         int cases =  calculateCases(dates);
+
         int increase = calculatePercentageIncrease(dates,intervalIndex,period);
         ahs.close();
 
@@ -94,31 +99,43 @@ public class AnalystHomepageLoader extends Loader {
 
     private static int calculatePercentageIncrease(String[] dates, int intervalIndex, String period) throws SQLException {
 
+        //take the start date from the dates passed in
         String startDate = dates[1];
-        String[] newDates;
-        newDates = computePeriod(intervalIndex,period,startDate);
-        int recentCases = calculateCases(dates);
-        int newCases = calculateCases(newDates);
+
+
+        // get the dates from the previous period
+        String[] newDates = computePeriod(intervalIndex,period,startDate);
+
+
+        int finalValue = calculateCases(dates);
+        int startingValue = calculateCases(newDates);
+
+
 
         //handles divide by 0 errors
-        if (recentCases == 0)
+        if (startingValue == 0)
             return 0;
 
         else {
-            return ((recentCases - newCases) / recentCases) * 100;
+
+            return ((finalValue - startingValue) / abs(startingValue)) * 100;
         }
 
 
     }
 
-    // compute the start and end dates for the analysis
-    public static String[] computePeriod(int intervalIndex, String periodStr, String startDate)
+    // compute the start and end dates of a given period
+    public static String[] computePeriod(int intervalIndex, String periodStr, String startDateStr)
     { //Interval Indices 1 = Days, 2 = Months, 3 = Years
 
         String [] dates = new String[2];
         int period = 0;
-
         String prevDateStr;
+
+        // format the start date string as a localdate so calculation can be performed on it
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(startDateStr,formatter);
+
 
         // convert the period to an integer
         try
@@ -130,23 +147,22 @@ public class AnalystHomepageLoader extends Loader {
             System.out.println("Integer parse Exception (AnalystHomepageLoader.computePeriod) Error code: " + e.getMessage());
         }
 
-
         // switch statement to decide how to calculate previous dates
 
         LocalDate prevDate = switch (intervalIndex) {
-            case 1 -> LocalDate.now().minusDays(period);
-            case 2 -> LocalDate.now().minusMonths(period);
-            case 3 -> LocalDate.now().minusYears(period);
+            case 1 -> startDate.minusDays(period);
+            case 2 -> startDate.minusMonths(period);
+            case 3 -> startDate.minusYears(period);
             default -> null;
         };
 
+
         prevDateStr = prevDate.toString();
-        //add dates
-        dates[0] = startDate;
+        //add dates to array
+        dates[0] = startDateStr;
         dates [1] = prevDateStr;
 
-        System.out.println(dates[0]);
-        System.out.println(dates[1]);
+
         return dates;
     }
 

@@ -27,7 +27,7 @@ public class ChartScreen extends Screen {
 
 
         ChartPanel chartPanel = new ChartPanel(lineChart);
-        draw(chartPanel);
+        updatePanels(chartPanel);
 
         super.drawHeaderLabel("Charting", super.getHeaderFont());
 
@@ -41,7 +41,7 @@ public class ChartScreen extends Screen {
 
     }
 
-    public void draw(ChartPanel chartPanel)
+    public void updatePanels(ChartPanel chartPanel)
     {
         headerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         JLabel headerLabel = super.getHeaderLabel();

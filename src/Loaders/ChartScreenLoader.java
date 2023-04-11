@@ -68,63 +68,41 @@ public class ChartScreenLoader {
         return lineChart;
 
     }
-
+    //get the case count between 2 given dates in a 2D array then add values to a dataset
     public static DefaultCategoryDataset calculateDataset(int intervalIndex, String period) throws SQLException {
 
         String startDate = java.time.LocalDate.now().toString();
-        // retrieves start and end dates for graphs
-
+        // retrieves start and end dates for period
         String[] dates = AnalystHomepageLoader.computePeriod(intervalIndex,period,startDate);
-
-        // retrieves all dates and case numbers for given period
+        // retrieves dates and case numbers for period
         ResultSet casesRS = getDataset(dates);
 
-        int size = 0;
-        while(casesRS.next())
-        {
-            size++;
-            casesRS.next();
-        }
-        casesRS.beforeFirst();
-
-
-        String[][] datasetArray = new String[2][size];
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String series1 = "Cases";
-
         //null check
         if (!casesRS.next())
             System.out.println("Empty Dataset!");
-
         else
         {
-            int i = 0;
             casesRS.beforeFirst();
             while(casesRS.next())
-            {
-
-                datasetArray[0][i] = casesRS.getString("test_date");
-                datasetArray[1][i] = casesRS.getString("COUNT(test_date)");
-                String testDate = datasetArray[0][i];
-                int caseCount = Integer.parseInt(datasetArray[1][i]);
+            {   //get each test date and case count
+                String testDate = casesRS.getString("test_date");
+                int caseCount = casesRS.getInt("COUNT(test_date)");
+                //add the date and case count to the dataset
                 dataset.addValue(caseCount, series1, testDate);
             }
 
         }
 
-
-
-
     return dataset;
     }
 
-    // returns a 2D array where the first column is dates and the second column is the case count for these dates
+    // returns a result set of dates and case counts between 2 given dates
     public static ResultSet getDataset(String[] dates) throws SQLException {
         Connection c = dbConnect();
         PreparedStatement cases = c.prepareStatement("CALL get_case_count_between_dates('" + dates[1] + "','" + dates[0] + "');", ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE );
         ResultSet casesRS = null;
-
-
 
         try
         {
@@ -135,9 +113,7 @@ public class ChartScreenLoader {
             System.out.println("SQL Exception (ChartScreenLoader.getDataset) Error Code: " + e.getMessage());
         }
 
-
-
-        // returns arraylist of test_dates oldest to newest
+        // returns result set of cases
         return casesRS;
     }
 

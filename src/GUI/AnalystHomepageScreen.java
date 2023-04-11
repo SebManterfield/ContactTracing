@@ -193,7 +193,7 @@ public void drawLabels(int[] caseNumArray, int agentID, String period, int cases
     if (increase == -1)
         strAnalysisIncrease= "n";
     else
-        strAnalysisIncrease = Integer.toString(cases);
+        strAnalysisIncrease = Integer.toString(increase);
 
 
 
