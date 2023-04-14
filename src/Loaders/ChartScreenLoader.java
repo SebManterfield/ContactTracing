@@ -33,9 +33,10 @@ public class ChartScreenLoader {
 
         System.out.println("dataset calculated");
 
-        String interval = "";
 
-        JFreeChart lineChart = createLineChart("Cases over the selected period ", dataset);
+        JFreeChart lineChart = createLineChart(
+                "Cases over the selected period: (" + period[2] + " Years, " + period[1] + " Months, " + period[0] + " Days)",
+                dataset);
         loadScreen(ahs,lineChart, agentID);
 
     }
@@ -59,18 +60,22 @@ public class ChartScreenLoader {
     public static DefaultCategoryDataset calculateDataset(String[] period) throws SQLException {
 
         String startDate = java.time.LocalDate.now().toString();
+
         // retrieves start and end dates for period
         String[] dates = AnalystHomepageLoader.computePeriod(period,startDate);
+
         // retrieves dates and case numbers for period
         ResultSet casesRS = getDataset(dates);
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String series1 = "Cases";
+
         //null check
         if (!casesRS.next())
-            System.out.println("Empty Dataset!");
+            System.out.println("Empty Dataset! ChartScreenLoader.calculateDataset()");
         else
         {
+            //resets the pointer to before the first row in resultset
             casesRS.beforeFirst();
             while(casesRS.next())
             {   //get each test date and case count

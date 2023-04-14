@@ -111,8 +111,8 @@ public class AnalystHomepageLoader extends Loader {
         String[] newDates = computePeriod(period,startDate);
 
 
-        int finalValue = calculateCases(dates);
-        int startingValue = calculateCases(newDates);
+        float finalValue = calculateCases(dates);
+        float startingValue = calculateCases(newDates);
 
 
 
@@ -121,8 +121,7 @@ public class AnalystHomepageLoader extends Loader {
             return 0;
 
         else {
-
-            return ((finalValue - startingValue) / abs(startingValue)) * 100;
+            return (int)((((finalValue - startingValue) / (startingValue)) * 100));
         }
 
 
@@ -130,20 +129,19 @@ public class AnalystHomepageLoader extends Loader {
 
     // compute the start and end dates of a given period
     public static String[] computePeriod(String[] periodArray, String startDateStr)
-    { //Interval Indices 1 = Days, 2 = Months, 3 = Years
-
+    {
+        // define variables
         String [] dates = new String[2];
         int periodDays = 0;
         int periodMonths = 0;
         int periodYears = 0;
-        String prevDateStr;
+
 
         // format the start date string as a localdate so calculation can be performed on it
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(startDateStr,formatter);
 
-
-        // convert the period to an integer
+        // convert the period strings to integers (these are already validated)
         try
         {
             periodDays =  Integer.parseInt(periodArray[0]);
@@ -155,18 +153,16 @@ public class AnalystHomepageLoader extends Loader {
             System.out.println("Integer parse Exception (AnalystHomepageLoader.computePeriod) Error code: " + e.getMessage());
         }
 
-        // subtract period from date
+        // subtract period from the start date
         LocalDate prevDate = startDate;
         prevDate = prevDate.minusDays(periodDays);
         prevDate = prevDate.minusMonths(periodMonths);
         prevDate = prevDate.minusYears(periodYears);
 
-
-        prevDateStr = prevDate.toString();
+        String prevDateStr = prevDate.toString();
         //add dates to array
         dates[0] = startDateStr;
         dates[1] = prevDateStr;
-
 
         return dates;
     }

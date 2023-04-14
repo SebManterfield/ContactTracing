@@ -96,7 +96,7 @@ public void updateContentPanel()
                                                     .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                             .addComponent(chartBtn, javax.swing.GroupLayout.Alignment.LEADING, 150,150,150)
                                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
-                                                                    .addComponent(percentIncreaseLabel,110,110,110)
+                                                                    .addComponent(percentIncreaseLabel,241,241,241)
                                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                     .addComponent(percentIncreaseVarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
 
@@ -152,12 +152,11 @@ public void updateContentPanel()
                                     .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addGap(20, 20, 20)
                                             .addComponent(trendAnalysisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-
                                     .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addContainerGap()
                                             .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
 
-                            .addGap(18, 18, 18)
+                            .addGap(5, 5, 5)
                             .addComponent(periodLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +264,7 @@ public void drawLabels(int[] caseNumArray, int agentID, String[] period, int cas
     this.casesLabel.setText(" Cases: ");
     labelArray.add(this.casesLabel);
 
-    this.percentIncreaseLabel.setText(" Percent Increase: ");
+    this.percentIncreaseLabel.setText(" Percent Increase from Previous Period: ");
     labelArray.add(this.percentIncreaseLabel);
 
     this.percentIncreaseVarLabel.setText(" " + strAnalysisIncrease);

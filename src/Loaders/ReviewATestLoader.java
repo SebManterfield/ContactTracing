@@ -87,7 +87,7 @@ public static void reviewBtnClicked(ReviewATestScreen rts, Test test,int agentID
     markAsReviewed(test);
     rts.close();
     String msg = "Test successfully reviewed!";
-    drawMessage(4,msg,agentID);
+    drawMessage(3,msg,agentID);
 
 }
 
