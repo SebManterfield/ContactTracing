@@ -22,19 +22,58 @@ public class SubmitATestLoader extends Loader{
 
 
         // validate all the fields
-        validateEmptyFields(sts,patientInfo);
-        validatePostcodeField(sts, patientInfo);
-        validateMobileFields(sts, patientInfo);
-        //reformat the date and update patient info
-        patientInfo = reformatDate(patientInfo,sts);
+       boolean emptyFields = validateEmptyFields(patientInfo);
+       if (!emptyFields)
+       {
+           String msg = ("You must fill in all fields!");
+           sts.close();
+           drawMessage(sts.getScreenID(),msg);
+           return;
+       }
 
-        // if validation is successful attempt to update database
+        boolean validPostcode = validatePostcodeField(patientInfo);
+       if (!validPostcode)
+       {
+           sts.close();
+           String msg = "Invalid Postcode entered!";
+           drawMessage(sts.getScreenID(),msg);
+           return;
+       }
+
+       boolean validMobile = validateMobileFields(patientInfo);
+       if (!validMobile)
+       { String msg = "The format of the mobile numbers is incorrect";
+           sts.close();
+           drawMessage(sts.getScreenID(),msg);
+           return;
+      }
+
+        SimpleDateFormat userDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        boolean validDate = validateDate(userDate,myFormat,patientInfo);
+
+        if (!validDate)
+            {
+                String msg = "Incorrect date format entered!";
+                sts.close();
+                drawMessage(sts.getScreenID(),msg);
+                return;
+            }
 
 
-        submitTest(patientInfo);
-        //inform the user that the test submission was a success
-        testSuccess(sts);
+       if ((validMobile) && (validPostcode) && (emptyFields) && (validDate)) {
+           //reformat the date and update patient info
 
+           patientInfo = reformatDate(patientInfo, userDate,myFormat);
+
+           // if validation is successful attempt to update database
+
+
+           submitTest(patientInfo);
+           //inform the user that the test submission was a success
+           testSuccess(sts);
+       }
     }
 
 
@@ -48,7 +87,7 @@ public class SubmitATestLoader extends Loader{
     }
 
     // validate that the postcode area is real
-    public static void validatePostcodeField(SubmitATestScreen sts, ArrayList<String> patientInfo) throws SQLException {
+    public static boolean validatePostcodeField(ArrayList<String> patientInfo) throws SQLException {
 
         //create a connection and get the users entered postcode
         Connection c = dbConnect();
@@ -68,32 +107,31 @@ public class SubmitATestLoader extends Loader{
         //check to see if result set is empty i.e incorrect postcode area
         if(!rs.next())
         {
-            String msg = "Invalid Postcode entered!";
-            drawMessage(sts.getScreenID(),msg);
+            return false;
         }
       // assume otherwise the postcode area is correct and do nothing
         c.close();
+        return true;
     }
 
     // validate the submitted fields and reformat the date
-    public static void validateEmptyFields(SubmitATestScreen sts, ArrayList<String> patientInfo)
+    public static boolean validateEmptyFields( ArrayList<String> patientInfo)
     {
         //check if any are empty
         for(String temp: patientInfo)
         {
             if(temp.length() == 0)
             {
-                String msg = ("You must fill in all fields!");
-                sts.close();
-                drawMessage(sts.getScreenID(),msg);
+                return false;
+
 
             }
         }
 
-
+        return true;
     }
     //check the submitted mobile fields are valid mobile numbers
-    public static void validateMobileFields(SubmitATestScreen sts, ArrayList<String> patientInfo)
+    public static boolean validateMobileFields(ArrayList<String> patientInfo)
     {
 
         String mobile1 = patientInfo.get(4);
@@ -104,31 +142,23 @@ public class SubmitATestLoader extends Loader{
         //check the length of mobile numbers is correct
         if((!(mobile1.length() == 11)) || (!(mobile2.length() == 11))||(!(mobile3.length() == 11)))
         {
-            String msg = "The format of the mobile numbers is incorrect";
-            sts.close();
-            drawMessage(sts.getScreenID(),msg);
+           return false;
         }
-
+    return true;
     }
     // this reformats the date string into a date which can be accepted by the database
-    public static ArrayList<String> reformatDate(ArrayList<String> patientInfo,SubmitATestScreen sts)
+    public static ArrayList<String> reformatDate(ArrayList<String> patientInfo, SimpleDateFormat userDate, SimpleDateFormat myFormat)
     {
         // declare variables for the existing date and new date
         String date = patientInfo.get(1);
         String formattedDate = null;
 
-        // set the format that is expected and the format that is needed
-        SimpleDateFormat userDate = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try
         {
             formattedDate = myFormat.format(userDate.parse(date));
         } catch (ParseException e) {
             System.out.println("Date Conversion error (SubmitATestLoader). Error Code:" + e.getMessage());
-            String msg = "Incorrect date format entered!";
-            sts.close();
-            drawMessage(sts.getScreenID(),msg);
         }
 
         patientInfo.set(1,formattedDate);
@@ -136,7 +166,18 @@ public class SubmitATestLoader extends Loader{
         return patientInfo;
     }
 
-
+public static boolean  validateDate (SimpleDateFormat userDate, SimpleDateFormat myFormat,ArrayList<String> patientInfo)
+{
+    String date = patientInfo.get(1);
+    try
+    {
+        date = myFormat.format(userDate.parse(date));
+    } catch (ParseException e) {
+        System.out.println("Date Conversion error (SubmitATestLoader). Error Code:" + e.getMessage());
+        return false;
+    }
+    return true;
+}
 
 
 
